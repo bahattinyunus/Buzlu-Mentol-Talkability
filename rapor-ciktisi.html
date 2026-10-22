@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project-Minus5 | H&S Buzlu Mentol Ferahlığı — Resmi Proje Çıktı Raporu</title>
+  <style>
+    :root {
+      --primary: #004b93;
+      --accent: #0095d9;
+      --dark: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --bg-light: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    body {
+      background: #e2e8f0;
+      color: var(--dark);
+      line-height: 1.55;
+      padding: 2rem 1rem;
+    }
+
+    .toolbar {
+      max-width: 210mm;
+      margin: 0 auto 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f172a;
+      color: #fff;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+    }
+
+    .btn-print {
+      background: #00e5ff;
+      color: #061224;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .page {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 18mm 18mm;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      border-radius: 6px;
+    }
+
+    .report-header {
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 1rem;
+      margin-bottom: 1.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .report-header h1 {
+      font-size: 1.55rem;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .report-header .sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .score-pill {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .slogan-banner {
+      background: linear-gradient(90deg, #eff6ff, #e0f2fe);
+      border-left: 5px solid var(--accent);
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 1.4rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .slogan-banner .slogan-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .slogan-banner .slogan-text {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0369a1;
+      margin: 0.15rem 0;
+    }
+
+    .section {
+      margin-bottom: 1.4rem;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-light);
+      border-left: 4px solid var(--primary);
+      padding: 0.45rem 0.85rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .section-title span.pts {
+      background: #dbeafe;
+      color: var(--primary);
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 0.55rem;
+      text-align: justify;
+    }
+
+    ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0.65rem;
+    }
+
+    li {
+      font-size: 0.88rem;
+      margin-bottom: 0.35rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.65rem 0 0.85rem;
+      font-size: 0.83rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .check-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.82rem;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .toolbar {
+        display: none;
+      }
+      .page {
+        box-shadow: none;
+        padding: 10mm 12mm;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div>
+      <strong>📄 Project-Minus5 — Resmi Yarışma & Sunum Çıktısı</strong>
+      <div style="font-size: 0.8rem; color: #94a3b8;">A4 PDF olarak kaydetmek veya yazdırmak için sağdaki butona tıklayın (veya Ctrl + P).</div>
+    </div>
+    <button class="btn-print" onclick="window.print()">🖨️ PDF Olarak Kaydet / Yazdır</button>
+  </div>
+
+  <div class="page">
+    <div class="report-header">
+      <div>
+        <h1>🧊 PROJECT-MINUS5: H&S BUZLU MENTOL FERAHLIĞI</h1>
+        <div class="sub">P&G WHO / WHAT / HOW / SUCCESS Brand Building Framework — 360° Talkability & Deneme Planı</div>
+      </div>
+      <div class="score-pill">100 PUANLIK TAM ÇERÇEVE</div>
+    </div>
+
+    <div class="slogan-banner">
+      <div class="slogan-title">Büyük Yaratıcı Fikir & Kampanya Sloganı</div>
+      <div class="slogan-text">"Harareti Kes, -5°C Hissine Geç!"</div>
+      <div style="font-size: 0.78rem; color: var(--muted);">
+        *Yasal/Klinik Uyumluluk Notu: -5°C gerçek bir sıcaklık düşüşü değil, ürünün mentol formülüyle saç derisinde yarattığı benzersiz ferahlık hissidir.
+      </div>
+    </div>
+
+    <!-- 1. WHO -->
+    <div class="section">
+      <div class="section-title">
+        <span>1. WHO — Tüketici, Personalar ve İçgörü</span>
+        <span class="pts">30 PUAN</span>
+      </div>
+      <p>
+        <strong>Hedef Kitle (Target Audience):</strong> 18–24 yaş arası, sürekli hareket halinde olan, hem zihinsel hem de fiziksel olarak sınırlarını zorlayan Z kuşağı üniversite öğrencileri, genç yazılımcılar/mühendisler ve aktif spor yapan gençler.
+      </p>
+      <p>
+        <strong>Tüketici İçgörüsü (Consumer Insight):</strong> Gençlerin hayatı <strong>"hararetli"</strong> (ısı, stres, zihinsel yük ve ter dolu) anlarla şekilleniyor. Bazen <strong>Cumhurbaşkanlığı Millet Kütüphanesi</strong>'nde saatler süren vize/final veya kodlama süreçlerinde zihinleri alev alıyor; bazen saatlerce süren siber güvenlik bayrağı yakalama (<strong>CTF</strong>) ve Hackathon yarışmalarında sistemleri gibi kendi beyinleri de ısınıyor; bazen de spor salonunda ağır <em>squat</em> veya <em>bench press</em> antrenmanları sonrasında fiziksel olarak bunalıyorlar. Bu yoğun anlarda ter, saç derisinde rahatsızlık ve potansiyel kepek problemi birleştiğinde, o "yanma" hissinden kurtulup anında bir <strong>"sistem sıfırlamasına (reset)"</strong> ihtiyaç duyuyorlar.
+      </p>
+      <p>
+        <strong>Neden Head & Shoulders? (RTB):</strong> Çünkü H&S Buzlu Mentol Ferahlığı, kepeğe karşı kanıtlanmış korumasının yanında, mentol kristalleri içeren formülüyle onlara suyla temas ettiği anda ihtiyaç duydukları <strong>"-5°C ferahlık hissini"</strong> sunuyor.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Persona</th>
+            <th>Hararet Anı (Tetikleyici)</th>
+            <th>Doğal Argo / Söylem</th>
+            <th>H&S Buzlu Mentol Rolü</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>👨‍💻 Zihinsel Maratoncu</strong> (Üniversiteli / CTF)</td>
+            <td>Gece 03:00 kütüphane sabahlaması, vize/final, 24 saatlik kodlama/CTF</td>
+            <td><em>"Kafa yandı, sistem error verdi, reset lazım."</em></td>
+            <td>Zihni açan <strong>"-5°C Soğuk Başlatma (Cold Boot)"</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🏋️ Fiziksel Sınır Zorlayıcı</strong> (Gym Sporcusu)</td>
+            <td>Ağır squat/bench press antrenmanı veya halı saha maçı çıkışı</td>
+            <td><em>"Hararet tavan yaptı, buhar oldum."</em></td>
+            <td>Antrenman yangısını kesen <strong>"-5°C Acil Soğutma"</strong></td>
+          </tr>
+          <tr>
+            <td><strong>🎧 Sosyal Hiperaktif</strong> (Kampüs Gezgini)</td>
+            <td>Gün boyu ders, kulüp etkinliği ve toplu taşıma sonrası akşam buluşması</td>
+            <td><em>"Hararet yapma, bi' kafayı soğutalım."</em></td>
+            <td>Sosyal ortama çıkmadan önce <strong>"%100'e Kadar Kepeksiz Özgüven"</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2. WHAT -->
+    <div class="section">
+      <div class="section-title">
+        <span>2. WHAT — Marka Önermesi ve Büyük Yaratıcı Fikir</span>
+        <span class="pts">45 PUAN</span>
+      </div>
+      <p>
+        Snickers'ın <em>"Açken sen sen değilsin"</em> veya Popeyes'ın <em>"Terbiyesiz tavuk"</em> kampanyalarındaki o akılda kalıcı <strong>zıtlık (gerilim) ve çözüm matematiğini</strong> kuruyoruz:
+      </p>
+      <ul>
+        <li><strong>Büyük Yaratıcı Fikir (Big Creative Idea):</strong> Şampuanı sadece pasif bir "temizlik ürünü" olmaktan çıkarıp, gençlerin hararet yaptığı anlarda basacakları bir <strong>"Soğutma Butonu / Emergency Cool-Down"</strong> olarak konumlandırıyoruz.</li>
+        <li><strong>Kampanya Sloganı:</strong> <strong><em>"Harareti Kes, -5°C Hissine Geç!"</em></strong></li>
+        <li><strong>Neden Konuşulur? (Talkability):</strong> Gençler gündelik hayatta bunaldıklarında veya çok yorulduklarında birbirlerine zaten <em>"hararet yapma"</em>, <em>"kafanı soğut"</em> derler. Slogan bu doğal argoyu sahiplenerek günlük sohbetlerin organik bir parçası haline gelir. Ayrıca Termal Kırmızı (Hararet) ile Buz Mavisi (-5°C Hissi) arasındaki görsel kontrast sosyal medyada anında dikkat çeker.</li>
+      </ul>
+    </div>
+
+    <!-- 3. HOW -->
+    <div class="section">
+      <div class="section-title">
+        <span>3. HOW — Konuşulabilir 360-Derece Entegre Plan</span>
+        <span class="pts">20 PUAN</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Faz & Mecra</th>
+            <th>Aktivasyon & İşleyiş Mekanizması</th>
+            <th>Talkability & Satışa Dönüşüm Rolü</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Faz 1: Dijital & AR</strong><br/>(Konuşmayı Başlatma)</td>
+            <td><strong>TikTok & IG "Termal Kamera" AR Filtresi:</strong> Kullanıcı filtreyi açtığında kafası kırmızı/turuncu (hararetli) görünür. Kafasını salladığında ekran buzlanır ve filtre <em>"-5°C Modu Aktif"</em> yazısıyla buz mavisi görünüme geçer.</td>
+            <td>Gençler final haftalarında, CTF/hackathonlarda ve antrenman sonrasında <em>"Benim hararet tavan yaptı, -5°C hissine geçiyorum #HararetiKes"</em> diyerek organik UGC üretir.</td>
+          </tr>
+          <tr>
+            <td><strong>Faz 2: Gerilla & Kampüs</strong><br/>(Fiziksel Deneyim)</td>
+            <td><strong>"Acil Durum Ferahlama Kabinleri" (Emergency Cool-Down Pods):</strong> ODTÜ, İTÜ, Millet Kütüphanesi ve büyük spor salonu çıkışlarına soğuk hava + mentol kokusu üfleyen, slow-mo video çeken interaktif kabinler kurulur.</td>
+            <td>Gençler 10 sn ferahlama deneyimi yaşar, ağır çekim videolarını indirir ve <strong>üzerinde dinamik QR kod bulunan 90 ml seyahat boyu numune (sample)</strong> alırlar.</td>
+          </tr>
+          <tr>
+            <td><strong>Faz 3: Perakende & E-Ticaret</strong><br/>(Satın Almaya Yönlendirme)</td>
+            <td><strong>"Soğutucu Dolap" Görünümlü POSM Stantlar:</strong> Marketlerde kişisel bakım reyonlarında buzdolabı hissiyatı veren özel LED aydınlatmalı stantlar ve Hızlı Ticaret (Getir/Trendyol Go) gece kahve/enerji içeceği sepet entegrasyonu.</td>
+            <td>Dijitalde ve kampüste yaratılan sohbeti (talkability) alışveriş anında doğrudan ürünü denemeye ve tam boy satın almaya (trial/purchase) dönüştürür.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 4. SUCCESS -->
+    <div class="section">
+      <div class="section-title">
+        <span>4. SUCCESS — Başarı Ölçütleri (KPIs) ve Uyumluluk</span>
+        <span class="pts">5 PUAN</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>KPI Kategorisi</th>
+            <th>Takip Edilen Mühendislik & Pazarlama Metrikleri</th>
+            <th>12 Haftalık Hedef Benchmark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Konuşulabilirlik (Talkability KPIs)</strong></td>
+            <td>• Termal Kamera AR filtresinin kullanım ve organik paylaşım (UGC) sayısı<br/>• <code>#HararetiKes</code> etiketinin sosyal medya erişimi ve etkileşim (engagement) oranı</td>
+            <td>• <strong>75.000+</strong> Organik UGC<br/>• <strong>5M+</strong> Erişim / <strong>>%6.5</strong> ER</td>
+          </tr>
+          <tr>
+            <td><strong>2. Deneme & Satın Alma (Trial & Purchase KPIs)</strong></td>
+            <td>• Fiziksel kabinlerde dağıtılan 50.000 QR kodlu numunenin taranma ve kupona dönüşüm oranı<br/>• "Soğutucu Dolap POSM" bulunan perakende noktalarında gerçekleşen satış hacmi artışı</td>
+            <td>• <strong>>%28</strong> QR Tarama / <strong>>%12</strong> İlk Satış<br/>• <strong>+%22</strong> Perakende Hacim Artışı</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <div class="check-item">✅ <strong>Tüketici zorluğu net mi?</strong> Evet (Ders, CTF ve spor sonrası hararet/bunalma anları).</div>
+        <div class="check-item">✅ <strong>Tek bir net slogan var mı?</strong> Evet (<em>"Harareti Kes, -5°C Hissine Geç!"</em>).</div>
+        <div class="check-item">✅ <strong>Aktivasyonlar ana fikirle birleşik mi?</strong> Evet (Dijital AR -> Soğutma Kabini -> Soğutucu Raf).</div>
+        <div class="check-item">✅ <strong>-5°C bir his olarak mı anlatıldı?</strong> Evet (Gerçek ısı düşüşü iddiası yapılmadı).</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
