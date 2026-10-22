@@ -15,7 +15,7 @@
       --heat-orange: #ff9500;
       --text-main: #f0f6fc;
       --text-muted: #8b9bb4;
-      --border-color: rgba(0, 229, 255, 0.2);
+      --border-color: rgba(0, 229, 255, 0.22);
       --accent-glow: 0 0 25px rgba(0, 229, 255, 0.35);
     }
 
@@ -35,12 +35,11 @@
     }
 
     .container {
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
 
-    /* Header / Hero */
     header {
       text-align: center;
       padding: 2.5rem 1rem;
@@ -90,12 +89,11 @@
       margin-top: 0.6rem;
     }
 
-    /* Grid Layout */
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 1.75rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.25rem;
     }
 
     .card {
@@ -111,8 +109,8 @@
     }
 
     .card h2 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -123,11 +121,11 @@
     .ar-viewport {
       position: relative;
       border-radius: 14px;
-      padding: 2rem 1.5rem;
+      padding: 1.75rem 1.4rem;
       text-align: center;
       transition: all 0.5s ease;
       overflow: hidden;
-      min-height: 290px;
+      min-height: 295px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -149,31 +147,31 @@
       display: flex;
       justify-content: space-between;
       font-family: monospace;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       padding: 0.4rem 0.75rem;
       background: rgba(0, 0, 0, 0.45);
       border-radius: 8px;
     }
 
     .avatar-state {
-      font-size: 4.2rem;
-      margin: 1rem 0 0.5rem;
+      font-size: 4rem;
+      margin: 0.9rem 0 0.4rem;
       transition: transform 0.35s ease;
     }
 
     .ar-status-text {
       font-weight: 800;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       letter-spacing: 0.04em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     .btn-cool {
       cursor: pointer;
       border: none;
-      padding: 0.9rem 1.6rem;
+      padding: 0.9rem 1.4rem;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 0.96rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -193,7 +191,6 @@
       color: #fff;
     }
 
-    /* Scenario Selector */
     .scenario-pills {
       display: flex;
       gap: 0.5rem;
@@ -221,16 +218,16 @@
       font-weight: 700;
     }
 
-    /* KPI Sliders */
+    /* Sliders */
     .slider-group {
-      margin-bottom: 1.15rem;
+      margin-bottom: 1.1rem;
     }
 
     .slider-header {
       display: flex;
       justify-content: space-between;
-      font-size: 0.9rem;
-      margin-bottom: 0.35rem;
+      font-size: 0.88rem;
+      margin-bottom: 0.3rem;
     }
 
     input[type="range"] {
@@ -242,27 +239,39 @@
     .kpi-results {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0.85rem;
-      margin-top: 1.25rem;
+      gap: 0.8rem;
+      margin-top: 1.15rem;
     }
 
     .kpi-box {
       background: rgba(0, 229, 255, 0.06);
       border: 1px solid rgba(0, 229, 255, 0.25);
       border-radius: 10px;
-      padding: 0.85rem;
+      padding: 0.8rem;
       text-align: center;
     }
 
     .kpi-val {
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--ice-blue);
     }
 
     .kpi-label {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
+    }
+
+    /* Pod QR Telemetry Simulator */
+    .pod-terminal {
+      background: #050a14;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 12px;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.84rem;
+      color: #a5f3fc;
+      margin-top: 0.9rem;
     }
 
     /* Framework Cards */
@@ -271,6 +280,7 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.25rem;
       margin-top: 1rem;
+      margin-bottom: 2.5rem;
     }
 
     .fw-step {
@@ -293,11 +303,11 @@
 
     .fw-step h3 {
       margin-bottom: 0.5rem;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
     }
 
     .fw-step p {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: var(--text-muted);
     }
 
@@ -316,7 +326,7 @@
     <header>
       <span class="badge">🧊 P&G Brand Building Framework • Project-Minus5</span>
       <h1>Head & Shoulders Buzlu Mentol Ferahlığı</h1>
-      <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+      <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">
         18–24 yaş Z kuşağının zihinsel ve fiziksel "hararet" anlarını sahiplenen, organik konuşulabilirlik (talkability) ve ürün denemesi (trial) odaklı 360° kampanya mimarisi.
       </p>
       <div class="slogan-box">"Harareti Kes, -5°C Hissine Geç!"</div>
@@ -327,7 +337,7 @@
       <!-- Interactive AR Filter Simulator -->
       <div class="card">
         <h2>📱 Faz 1: "Termal Kamera" AR Filtresi Simülatörü</h2>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.9rem;">
           Kullanıcının hararet anını seçin ve <strong>-5°C Ferahlık Hissi</strong> dönüşümünü test edin:
         </p>
 
@@ -358,7 +368,7 @@
       <!-- Interactive KPI & Talkability ROI Calculator -->
       <div class="card">
         <h2>📊 Faz 4: Canlı KPI & Dönüşüm Simülatörü</h2>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.9rem;">
           360° temas noktalarının konuşulabilirlik (UGC), QR kodlu numune dönüşümü ve satış etkisini simüle edin:
         </p>
 
@@ -396,7 +406,7 @@
             <div class="kpi-label">QR Kod Okutan Tekil Genç</div>
           </div>
           <div class="kpi-box">
-            <div class="kpi-val" id="outTrialSales">6.050</div>
+            <div class="kpi-val" id="outTrialSales">6.025</div>
             <div class="kpi-label">Doğrudan İlk Satın Alma (New User)</div>
           </div>
           <div class="kpi-box">
@@ -404,6 +414,27 @@
             <div class="kpi-label">Soğutucu POSM Perakende Satış Artışı</div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Emergency Cool-Down Pod IoT Telemetry Simulator -->
+    <div class="card" style="margin-bottom: 2.25rem;">
+      <h2>🧊 Faz 2: "Emergency Cool-Down Pod" IoT Numune & QR Telemetri Simülatörü</h2>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+        Üniversite kampüsleri ve spor salonu çıkışlarındaki ferahlama kabinlerinden dağıtılan her 90 ml numunenin lokasyon bazlı UTM/QR izleme kaydını test edin:
+      </p>
+      <div class="scenario-pills">
+        <div class="pill active" onclick="dispensePodSample('ODTU_MERKEZ_01', 'ODTÜ Çarşı / Kütüphane Çıkışı', this)">🎓 ODTÜ Kampüs Pod #01</div>
+        <div class="pill" onclick="dispensePodSample('MILLET_KUTUPHANE_02', 'Cumhurbaşkanlığı Millet Kütüphanesi', this)">📚 Millet Kütüphanesi Pod #02</div>
+        <div class="pill" onclick="dispensePodSample('ITU_AYAZAGA_03', 'İTÜ Ayazağa Hackathon Alanı', this)">💻 İTÜ Ayazağa Pod #03</div>
+        <div class="pill" onclick="dispensePodSample('MACFIT_GYM_04', 'MACFit Antrenman Çıkışı', this)">🏋️ Gym Çıkışı Pod #04</div>
+      </div>
+      <div id="podTerminal" class="pod-terminal">
+        [POD_STATUS]: ACTIVE | 4D Menthol Nebulizer & Cold Air Jet: READY<br />
+        [LOCATION]: ODTÜ Çarşı / Kütüphane Çıkışı (POD_ID: ODTU_MERKEZ_01)<br />
+        [SAMPLE_DISPENSED]: H&S Buzlu Mentol 90ml Travel Size (#HS-M5-84920)<br />
+        [DYNAMIC_QR_URL]: https://hs-minus5.com/try?utm_source=coolpod&utm_medium=qr&utm_content=ODTU_MERKEZ_01<br />
+        [CLAIM_COMPLIANCE]: "-5°C Ferahlık Hissi" (Sensory cooling sensation verified ✅)
       </div>
     </div>
 
@@ -443,7 +474,7 @@
     </div>
 
     <footer>
-      Project-Minus5 • Head & Shoulders Buzlu Mentol Ferahlığı Case Study Repository
+      Project-Minus5 • Head & Shoulders Buzlu Mentol Ferahlığı Case Study Repository • Bahattin Yunus ÇETİN
     </footer>
   </div>
 
@@ -468,7 +499,8 @@
 
     function selectScenario(key, el) {
       currentScenario = key;
-      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      const pills = el.parentElement.querySelectorAll('.pill');
+      pills.forEach(p => p.classList.remove('active'));
       el.classList.add('active');
       renderARState();
     }
@@ -526,6 +558,19 @@
       document.getElementById('outScans').textContent = scans.toLocaleString('tr-TR');
       document.getElementById('outTrialSales').textContent = directSales.toLocaleString('tr-TR');
       document.getElementById('outRetailLift').textContent = '+%' + retailLift;
+    }
+
+    function dispensePodSample(podId, locName, el) {
+      const pills = el.parentElement.querySelectorAll('.pill');
+      pills.forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      const token = Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('podTerminal').innerHTML =
+        `[POD_STATUS]: ACTIVE | 10s Cold Air Vortex + Menthol Mist TRIGGERED ❄️<br />` +
+        `[LOCATION]: ${locName} (POD_ID: ${podId})<br />` +
+        `[SAMPLE_DISPENSED]: H&S Buzlu Mentol 90ml Travel Size (#HS-M5-${token})<br />` +
+        `[DYNAMIC_QR_URL]: https://hs-minus5.com/try?utm_source=coolpod&utm_medium=qr&utm_content=${podId}&token=${token}<br />` +
+        `[CLAIM_COMPLIANCE]: "-5°C Ferahlık Hissi" (Sensory cooling sensation verified ✅)`;
     }
   </script>
 </body>

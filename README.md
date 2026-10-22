@@ -21,7 +21,9 @@ Bu çalışma, hem ana strateji özetini hem de her fazın derinlemesine mühend
 | 💡 **[`docs/02-WHAT-Creative-Strategy-and-Copywriting.md`](./docs/02-WHAT-Creative-Strategy-and-Copywriting.md)** | Büyük Yaratıcı Fikir, Slogan Mimarisi, TikTok/Reels Senaryoları ve Talkability Psikolojisi | **45 Puan** |
 | 🚀 **[`docs/03-HOW-360-Execution-and-Phased-Rollout.md`](./docs/03-HOW-360-Execution-and-Phased-Rollout.md)** | Termal AR Filtresi, *Emergency Cool-Down Pod* Teknik Kurulumu, Perakende POSM ve 12 Haftalık Plan | **20 Puan** |
 | 📊 **[`docs/04-SUCCESS-KPI-Framework-and-Analytics.md`](./docs/04-SUCCESS-KPI-Framework-and-Analytics.md)** | Kuzey Yıldızı KPI Matrisi, QR/UTM Dönüşüm Hunisi, A/B Test Kurgusu ve DO's/DON'Ts Denetimi | **5 Puan** |
-| 🖥️ **[`index.html`](./index.html)** | **İnteraktif Web Simülatörü:** Canlı *Termal Kamera AR Filtresi* önizlemesi ve dinamik *KPI & ROI Hesaplayıcı* | **Canlı Prototip** |
+| 🛠️ **[`docs/05-Emergency-CoolDown-Pod-IoT-Architecture.md`](./docs/05-Emergency-CoolDown-Pod-IoT-Architecture.md)** | *Emergency Cool-Down Pod* 4D Duyusal Donanım, Akıllı Numune Otomatı, KVKK ve IoT Telemetri Mimarisi | **Mühendislik Ek** |
+| 🎤 **[`docs/06-Pitch-Deck-and-Jury-QA-Playbook.md`](./docs/06-Pitch-Deck-and-Jury-QA-Playbook.md)** | 5 Dakikalık Pitch Sunum Akışı, Optimal Bütçe Dağılımı ve Jüri Soru-Cevap (Q&A) Savunma Matrisi | **Sunum Rehberi** |
+| 🖥️ **[`index.html`](./index.html)** | **İnteraktif Web Simülatörü:** Canlı *Termal Kamera AR Filtresi*, *Pod QR Telemetri* ve *KPI & ROI Hesaplayıcı* | **Canlı Prototip** |
 
 ---
 
