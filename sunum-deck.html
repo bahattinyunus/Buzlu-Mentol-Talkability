@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project-Minus5 | 5 Dakikalık İnteraktif Jüri Sunumu (Pitch Deck)</title>
+  <style>
+    :root {
+      --bg-dark: #050a14;
+      --bg-slide: #0b1528;
+      --bg-card: rgba(16, 29, 56, 0.85);
+      --ice-blue: #00e5ff;
+      --ice-deep: #0077ff;
+      --heat-red: #ff3b30;
+      --heat-orange: #ff9500;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(0, 229, 255, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top right, #0d2142 0%, var(--bg-dark) 70%);
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Pitch Control Bar */
+    .pitch-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 1.5rem;
+      background: rgba(5, 10, 20, 0.92);
+      border-bottom: 1px solid var(--border);
+      z-index: 20;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .brand-badge {
+      background: rgba(0, 229, 255, 0.15);
+      border: 1px solid var(--ice-blue);
+      color: var(--ice-blue);
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text-main);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--ice-blue);
+      color: var(--ice-blue);
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+
+    .timer-val {
+      font-weight: 800;
+      color: var(--ice-blue);
+      font-size: 1.05rem;
+    }
+
+    /* Slide Viewport */
+    .deck-viewport {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 2.5rem;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1180px;
+      background: var(--bg-slide);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(0, 229, 255, 0.1);
+      animation: fadeSlide 0.35s ease;
+      position: relative;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(12px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.9rem;
+    }
+
+    .rubric-tag {
+      display: inline-block;
+      padding: 0.3rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.2), rgba(0, 119, 255, 0.2));
+      border: 1px solid var(--ice-blue);
+      color: var(--ice-blue);
+    }
+
+    .slide h1 {
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(90deg, #fff, var(--ice-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide h2 {
+      font-size: 1.55rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.35rem;
+      margin-top: 1.2rem;
+    }
+
+    .p-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.35rem;
+    }
+
+    .p-card h3 {
+      color: var(--ice-blue);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .p-card p, .p-card li {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.55;
+    }
+
+    .p-card ul {
+      padding-left: 1.2rem;
+    }
+
+    .hero-slogan {
+      text-align: center;
+      padding: 1.4rem 2rem;
+      margin: 1.25rem 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 59, 48, 0.2), rgba(0, 229, 255, 0.25));
+      border: 2px solid var(--ice-blue);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 900;
+    }
+
+    /* Speaker Notes Drawer */
+    .speaker-notes {
+      margin-top: 1.35rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid var(--emerald);
+      font-size: 0.86rem;
+      color: #d1fae5;
+      display: block;
+    }
+
+    .speaker-notes.hidden {
+      display: none;
+    }
+
+    /* Bottom Controls & Progress */
+    .deck-footer {
+      padding: 0.75rem 1.5rem;
+      background: rgba(5, 10, 20, 0.95);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-bar-wrap {
+      flex: 1;
+      max-width: 400px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0 1.5rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--ice-deep), var(--ice-blue));
+      width: 10%;
+      transition: width 0.3s ease;
+    }
+
+    .ctrl-btn {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.15rem;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .ctrl-btn.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    table.deck-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.8rem;
+      font-size: 0.86rem;
+    }
+
+    table.deck-table th, table.deck-table td {
+      border: 1px solid rgba(0, 229, 255, 0.22);
+      padding: 0.65rem 0.8rem;
+      text-align: left;
+    }
+
+    table.deck-table th {
+      background: rgba(0, 229, 255, 0.12);
+      color: var(--ice-blue);
+    }
+
+    @media print {
+      body { height: auto; overflow: visible; background: #050a14; }
+      .pitch-topbar, .deck-footer { display: none; }
+      .deck-viewport { display: block; padding: 0; }
+      .slide { display: block !important; page-break-after: always; margin-bottom: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pitch-topbar">
+    <div class="brand-title">
+      <span class="brand-badge">🎤 PITCH DECK</span>
+      <span>Project-Minus5 • H&S Buzlu Mentol Ferahlığı</span>
+    </div>
+
+    <div class="timer-box">
+      <span>⏱️ 5 DK PITCH SAYACI:</span>
+      <span id="pitchTimer" class="timer-val">05:00</span>
+      <button class="nav-btn" onclick="toggleTimer()" id="timerBtn">Başlat</button>
+      <button class="nav-btn" onclick="resetTimer()">Sıfırla</button>
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-btn" onclick="toggleNotes()">📝 Konuşmacı Notu (N)</button>
+      <a href="index.html" class="nav-btn">🖥️ Canlı Simülatör</a>
+      <a href="rapor-ciktisi.html" class="nav-btn">🖨️ A4 PDF Rapor</a>
+    </div>
+  </div>
+
+  <div class="deck-viewport">
+    <!-- SLIDE 1: COVER -->
+    <div class="slide active">
+      <div class="slide-header">
+        <span class="rubric-tag">P&G Brand Building Framework • 100 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 1 / 10 • Giriş & Vizyon</span>
+      </div>
+      <h1>PROJECT-MINUS5: H&S BUZLU MENTOL FERAHLIĞI</h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 850px;">
+        18–24 yaş Z kuşağının zihinsel ve fiziksel <strong>"Hararet"</strong> anlarını sahiplenen, organik konuşulabilirlik (Talkability) ve doğrulanabilir ürün denemesi (Trial) odaklı 360° kampanya mimarisi.
+      </p>
+      <div class="hero-slogan">"Harareti Kes, -5°C Hissine Geç!"</div>
+      <div class="grid-3">
+        <div class="p-card">
+          <h3>🎯 1. WHO (30 Puan)</h3>
+          <p>Ders, siber güvenlik CTF/kodlama ve spor sonrası "hararet" yapan 18–24 yaş aktif gençler.</p>
+        </div>
+        <div class="p-card">
+          <h3>💡 2. WHAT (45 Puan)</h3>
+          <p>Şampuanı sıradan bir temizlik ürününden çıkarıp <strong>"Acil Durum Soğutma Butonu"</strong> yapmak.</p>
+        </div>
+        <div class="p-card">
+          <h3>🚀 3. HOW & SUCCESS (25 Puan)</h3>
+          <p>Termal AR Filtresi $\rightarrow$ Kampüs Cool-Down Kabini $\rightarrow$ Soğutucu Dolap POSM & QR Dönüşüm Hunisi.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (00:00 - 00:30):</strong> "Merhaba değerli jüri. Bugün Head & Shoulders Buzlu Mentol Ferahlığı'nı 18-24 yaş gençler arasında banyodaki sessiz bir şişeden çıkarıp, günlük hayatlarının en hararetli anlarında birbirlerine söyledikleri kültürel bir fenomene dönüştüren Project-Minus5'ı sunuyoruz: Harareti Kes, -5°C Hissine Geç!"
+      </div>
+    </div>
+
+    <!-- SLIDE 2: WHO - TARGET & INSIGHT -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">1. WHO — Tüketici & İçgörü • 30 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 2 / 10 • İçgörü Matematiği</span>
+      </div>
+      <h2>Z Kuşağının Ortak Kriz Anı: "HARARET"</h2>
+      <p style="color: var(--text-muted);">18–24 yaş üniversite öğrencileri ve aktif gençler sınırlarını zorlayan bir tempoda yaşıyor:</p>
+      <div class="grid-2">
+        <div class="p-card" style="border-color: var(--heat-red);">
+          <h3 style="color: #ff6b6b;">🔥 Tüketici Gerilimi (The Tension)</h3>
+          <ul>
+            <li><strong>Zihinsel Hararet:</strong> Cumhurbaşkanlığı Millet Kütüphanesi'nde saatler süren vize/final sabahlamaları veya 24 saatlik siber güvenlik CTF / Hackathon maratonlarında beyinleri bilgisayar işlemcisi gibi ısınıyor.</li>
+            <li><strong>Fiziksel Hararet:</strong> Spor salonunda ağır <em>squat / bench press</em> setleri sonrasında veya kampüs koşturmacasında ter, kaşıntı ve kepek stresi birleşiyor.</li>
+            <li><strong>Eksik Parça:</strong> Sıradan bir duş onları sadece temizliyor; oysa onların <strong>anında bir "Sistem Sıfırlamasına (System Reset)"</strong> ihtiyacı var!</li>
+          </ul>
+        </div>
+        <div class="p-card">
+          <h3>🧊 Neden H&S Buzlu Mentol? (Reason to Believe)</h3>
+          <ul>
+            <li><strong>Duyusal Şok (-5°C Ferahlık Hissi):</strong> Mentol kristalleri içeren formülü suyla temas ettiği anda saç derisindeki soğuk reseptörlerini (TRPM8) uyararak anında <strong>"-5°C ferahlık hissi"</strong> yaşatır.</li>
+            <li><strong>Klinik Güvence:</strong> Stres ve terin tetiklediği kepeğe karşı %100'e kadar kanıtlanmış koruma sağlar.</li>
+            <li><strong>Uyumluluk Notu:</strong> <em>-5°C gerçek bir sıcaklık düşüşü değil, ürünün yarattığı duyusal ferahlık hissidir.</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (00:30 - 01:15):</strong> "Hedef kitlemiz 18-24 yaş gençler. İster Millet Kütüphanesi'nde gece 03:00'te sınava çalışsınlar, ister CTF yarışmasında kod yazsınlar, ister spor salonunda squat altında ter döksünler; yaşadıkları ortak kriz 'Hararet'. Ter ve kepek endişesi birleştiğinde sadece temizlenmek yetmiyor, kafalarını sıfırlayacak bir reset arıyorlar."
+      </div>
+    </div>
+
+    <!-- SLIDE 3: WHO - 3 PERSONAS -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">1. WHO — Mikro-Segmentasyon • 30 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 3 / 10 • 3 Çekirdek Persona</span>
+      </div>
+      <h2>Üç Çekirdek Z Kuşağı Personası ve Doğal Argoları</h2>
+      <div class="grid-3">
+        <div class="p-card">
+          <h3>👨‍💻 1. Zihinsel Maratoncu</h3>
+          <p><strong>Profil:</strong> 20 yaş, Mühendislik öğrencisi, Kütüphane & CTF sabahçısı.</p>
+          <p style="margin-top:0.5rem;"><strong>Hararet Anı:</strong> Gece 03:00 final çalışması veya 18. saat Hackathon.</p>
+          <p style="margin-top:0.5rem; color: var(--ice-blue);"><strong>Günlük Argosu:</strong> <em>"Kafa yandı, sistem error verdi, reset lazım!"</em></p>
+        </div>
+        <div class="p-card">
+          <h3>🏋️ 2. Fiziksel Sınır Zorlayıcı</h3>
+          <p><strong>Profil:</strong> 22 yaş, Haftada 4 gün Gym / Crossfit / Halı saha sporcusu.</p>
+          <p style="margin-top:0.5rem;"><strong>Hararet Anı:</strong> Ağır bacak/göğüs antrenmanı sonrası ter ve yanma hissi.</p>
+          <p style="margin-top:0.5rem; color: var(--ice-blue);"><strong>Günlük Argosu:</strong> <em>"Hararet tavan yaptı, buhar oldum!"</em></p>
+        </div>
+        <div class="p-card">
+          <h3>🎧 3. Sosyal Hiperaktif</h3>
+          <p><strong>Profil:</strong> 19 yaş, Kampüs kulüp üyesi, konser ve etkinlik gezgini.</p>
+          <p style="margin-top:0.5rem;"><strong>Hararet Anı:</strong> Gün boyu toplu taşıma ve ders sonrası akşam buluşması öncesi.</p>
+          <p style="margin-top:0.5rem; color: var(--ice-blue);"><strong>Günlük Argosu:</strong> <em>"Hararet yapma, bi' kafayı soğutalım!"</em></p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (01:15 - 01:45):</strong> "Gençler kendi aralarında zaten her gün 'hararet yapma', 'kafa yandı', 'kafayı soğutalım' diyorlar. Biz sıfırdan yapay bir reklam dili uydurmuyoruz; onların dilindeki bu hararet anını sahipleniyoruz."
+      </div>
+    </div>
+
+    <!-- SLIDE 4: WHAT - BIG CREATIVE IDEA -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">2. WHAT — Büyük Yaratıcı Fikir • 45 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 4 / 10 • Zıtlık & Çözüm Matematiği</span>
+      </div>
+      <h2>Büyük Yaratıcı Fikir: "Acil Durum Soğutma Butonu"</h2>
+      <p style="color: var(--text-muted);">Snickers'ın <em>"Açken sen sen değilsin"</em> veya Popeyes'ın <em>"Terbiyesiz tavuk"</em> kampanyalarındaki zıtlık ve çözüm matematiğini kuruyoruz:</p>
+      <div class="hero-slogan">"Harareti Kes, -5°C Hissine Geç!"</div>
+      <table class="deck-table">
+        <thead>
+          <tr>
+            <th>Stratejik Boyut</th>
+            <th>🔥 Kriz Anı (Gerilim / Öncesi)</th>
+            <th>❄️ Marka Çözümü (Dönüşüm / Sonrası)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Duygusal & Zihinsel Durum</strong></td>
+            <td>Aşırı yüklenme, stres, ter, kaşıntı ve "Kafa Yanması"</td>
+            <td>Anında "-5°C Ferahlık Hissi", sıfırlanmış zihin ve kepeksiz özgüven</td>
+          </tr>
+          <tr>
+            <td><strong>Görsel Kodlama (Visual Hook)</strong></td>
+            <td>Kızılötesi Termal Kamera Kırmızısı / Turuncusu (`[HARARET: %99]`)</td>
+            <td>Kırağı / Buz Kristalleri ve H&S Parlak Buz Mavisi (`[-5°C HİSSİ AKTİF]`)</td>
+          </tr>
+          <tr>
+            <td><strong>Kategori Konumlandırması</strong></td>
+            <td>Sıradan, sıkıcı, pasif banyo temizlik ürünü</td>
+            <td>Gençlerin bunaldıkları anda bastıkları <strong>"Emergency Cool-Down"</strong> butonu</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (01:45 - 02:30):</strong> "Puanlamanın en büyük kısmı olan WHAT adımında şampuanı banyodaki pasif bir temizlik malzemesinden çıkarıp bir 'Acil Durum Soğutma Butonu' olarak konumlandırıyoruz. Termal kırmızısından buz mavisine geçiş, sosyal medyada ilk saniyede kaydırmayı durduran görsel imzamız oluyor."
+      </div>
+    </div>
+
+    <!-- SLIDE 5: WHAT - VIRAL SCRIPTS & TALKABILITY -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">2. WHAT — Kreatif Uygulama • 45 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 5 / 10 • Hero Video & Talkability</span>
+      </div>
+      <h2>Neden Organik Konuşulabilirlik (Talkability) Üretir?</h2>
+      <div class="grid-2">
+        <div class="p-card">
+          <h3>🎬 15 Sn TikTok/Reels: "Kütüphane Termal Alarmı"</h3>
+          <ul>
+            <li><strong>00-04 sn:</strong> Gece 03:15 Millet Kütüphanesi / CTF. Kamera <strong>Termal Moda</strong> geçer; öğrencinin kafası kıpkırmızı parlar (`[HARARET: %99 🔥]`).</li>
+            <li><strong>04-08 sn:</strong> Arkadaşı: <em>"Kanka kafa alev aldı, hararet yapma!"</em> diyerek masaya buzlu H&S Buzlu Mentol şişesini bırakır.</li>
+            <li><strong>08-15 sn:</strong> Duşta şampuan değdiği an <em>Buz Kırılma ASMR</em> sesiyle termal ekran <strong>Buz Mavisine</strong> döner: <strong>"Harareti Kes, -5°C Hissine Geç!"</strong></li>
+          </ul>
+        </div>
+        <div class="p-card">
+          <h3>🧠 Talkability (Konuşulabilirlik) Psikolojisi</h3>
+          <ul>
+            <li><strong>1. Doğal Dil Sahiplenmesi:</strong> Gençler arkadaşlarına <em>"Hararet yapma, -5°C hissine geç"</em> diyerek sloganı günlük şakalaşmalarında kullanır.</li>
+            <li><strong>2. Mizahi Öz-İfade (Humblebrag):</strong> Çok çalıştığını veya ağır spor yaptığını övünmeden, Termal AR filtresiyle <em>"Yine hararet tavan yaptı"</em> diyerek paylaşma imkanı verir.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (02:30 - 03:00):</strong> "Bir üniversiteli gece 3'te ders çalıştığını doğrudan söylese sıkıcıdır; ama Termal AR filtresiyle kafasının kıpkırmızı yandığı komik bir story atıp '#HararetiKes' dediğinde bu organik olarak yayılır."
+      </div>
+    </div>
+
+    <!-- SLIDE 6: HOW - PHASE 1 DIGITAL & AR -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">3. HOW — 360° Entegre Plan (Faz 1) • 20 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 6 / 10 • Dijital & AR Aktivasyonu</span>
+      </div>
+      <h2>Faz 1: "Termal Kamera" AR Filtresi ve Topluluk Tohumlama</h2>
+      <div class="grid-3">
+        <div class="p-card">
+          <h3>📱 1. Termal Kamera AR Filtresi</h3>
+          <p>TikTok ve Instagram'da kamera açıldığında kafa bölgesi <strong>kırmızı termal</strong> görünür. Kullanıcı <strong>kafasını salladığında (Head Shake)</strong> buz kırılma sesiyle ekran buzlanır ve <code>[-5°C Hissi Aktif ❄️]</code> moduna geçer.</p>
+        </div>
+        <div class="p-card">
+          <h3>🎮 2. CTF, Hackathon & Discord</h3>
+          <p>Üniversite siber güvenlik (CTF) ve 24 saatlik kodlama yarışmalarının gece 02:00 "kafa yanma" saatinde yarışmacılara buzlu kutularda <strong>Emergency Overheat Kit</strong> dağıtılır.</p>
+        </div>
+        <div class="p-card">
+          <h3>🏋️ 3. Strava & Gym Seeding</h3>
+          <p>Kampüs mizah sayfaları ve fitness influencer'ları vize haftası ve antrenman çıkışlarında <code>#HararetiKes</code> akımını başlatır; paylaşanlar kabin numune kodu kazanır.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (03:00 - 03:30):</strong> "HOW bölümünde kopuk taktikler değil, birbirine bağlı 3 fazlı bir sistem kurduk. Faz 1'de TikTok ve Instagram'daki Termal Kamera AR filtresiyle dijitalde konuşmayı başlatıyoruz."
+      </div>
+    </div>
+
+    <!-- SLIDE 7: HOW - PHASE 2 EMERGENCY COOL-DOWN PODS -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">3. HOW — 360° Entegre Plan (Faz 2) • 20 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 7 / 10 • Gerilla & Kampüs Deneyimi</span>
+      </div>
+      <h2>Faz 2: "Emergency Cool-Down Pods" (Acil Ferahlama Kabinleri)</h2>
+      <p style="color: var(--text-muted);">ODTÜ, İTÜ, Millet Kütüphanesi ve MACFit çıkışlarına kurulan 4 boyutlu duyusal deneyim ve akıllı numune istasyonları:</p>
+      <div class="grid-2">
+        <div class="p-card">
+          <h3>🧊 15 Saniyelik 4 Boyutlu Fiziksel Sıfırlama</h3>
+          <ul>
+            <li><strong>1. Termal Yakalama:</strong> Dış ekran yaklaşan öğrenciyi kırmızı termal silüetle yakalar: <em>"Hararet Tespit Edildi!"</em></li>
+            <li><strong>2. 4D Duyusal Şok:</strong> İçerideki <strong>"Harareti Kes"</strong> butonuna basıldığında saç derisine soğuk hava jetleri, doğal mentol kokusu nebulizatörü ve buz mavisi LED şovu başlar.</li>
+            <li><strong>3. Slow-Mo UGC Video:</strong> Soğuk rüzgarla saçları uçuşan gencin 5 sn ağır çekim videosu çekilir ve QR ile telefonuna indirilir.</li>
+          </ul>
+        </div>
+        <div class="p-card">
+          <h3>🎁 Akıllı QR Numune (50.000 Adet 90ml Sample)</h3>
+          <ul>
+            <li>Deneyim sonunda otomat bölmesinden <strong>üzerinde lokasyona özel dinamik QR kod bulunan 90 ml seyahat boyu H&S Buzlu Mentol</strong> verilir.</li>
+            <li><strong>Anti-Suistimal (Fair Sampling):</strong> Tek kullanımlık QR oturum doğrulaması ile her öğrenciye 1 adet numune verilerek stok verimliliği %100 korunur.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (03:30 - 04:00):</strong> "Faz 2'de ODTÜ, İTÜ, Millet Kütüphanesi ve spor salonu çıkışlarına Acil Durum Ferahlama Kabinleri kuruyoruz. Genç içeride 10 saniyede soğuk hava ve mentol kokusuyla ferahlıyor, ağır çekim videosunu alıyor ve üzerinde dinamik QR kod olan 90 ml numunesini kazanıyor."
+      </div>
+    </div>
+
+    <!-- SLIDE 8: HOW - PHASE 3 RETAIL & QUICK COMMERCE -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">3. HOW — 360° Entegre Plan (Faz 3) • 20 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 8 / 10 • Perakende & Hızlı Ticaret</span>
+      </div>
+      <h2>Faz 3: Perakende "Soğutucu Dolap" POSM ve Hızlı Ticaret</h2>
+      <div class="grid-2">
+        <div class="p-card">
+          <h3>🛒 Mağaza İçi "Soğutucu Dolap" Stantları</h3>
+          <p>Gratis, Watsons ve Migros'ta ürünü sıradan şampuan rafından çıkarıp; koridor başında <strong>buzdolabı/içecek soğutucusu formunda</strong>, buğulu cam detaylı, buz mavisi LED ışıklı ve kapak açıldığında soğuk rüzgar sesi veren özel POSM stantlarda sergiliyoruz.</p>
+        </div>
+        <div class="p-card">
+          <h3>⚡ Getir & Trendyol Go Sepet Algoritması</h3>
+          <p>Gece 22:00–04:00 arası soğuk kahve / enerji içeceği veya antrenman sonrası protein sütü sipariş eden gençlere ödeme ekranında <strong><em>"Kafanı da Soğut: H&S Buzlu Mentol %25 İndirimli"</em></strong> çapraz satış teklifi çıkarıyoruz.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (04:00 - 04:25):</strong> "Faz 3'te ise dijitalde ve kampüste yarattığımız bu konuşulabilirliği markette 'Soğutucu Dolap' görünümlü stantlarla ve Getir/Trendyol Go gece sepet entegrasyonuyla doğrudan satışa çeviriyoruz."
+      </div>
+    </div>
+
+    <!-- SLIDE 9: SUCCESS - ENGINEERING KPIS -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">4. SUCCESS — Başarı Ölçütleri (KPIs) • 5 Puan</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 9 / 10 • Analitik & Dönüşüm Hunisi</span>
+      </div>
+      <h2>Mühendislik Hassasiyetinde KPI ve Dönüşüm Matrisi</h2>
+      <table class="deck-table">
+        <thead>
+          <tr>
+            <th>KPI Kategorisi</th>
+            <th>Takip Edilen Performans Göstergesi</th>
+            <th>Ölçüm Yöntemi</th>
+            <th>12 Haftalık Hedef</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Talkability (Konuşulabilirlik)</strong></td>
+            <td>Termal Kamera AR Filtresi Organik UGC Sayısı</td>
+            <td>TikTok & Meta Spark AR Analitiği</td>
+            <td><strong>75.000+ Paylaşım</strong></td>
+          </tr>
+          <tr>
+            <td><strong>1. Talkability (Konuşulabilirlik)</strong></td>
+            <td><code>#HararetiKes</code> Erişim ve Etkileşim Oranı</td>
+            <td>Sosyal Medya Dinleme (Brandwatch)</td>
+            <td><strong>5M+ Erişim / >%6.5 ER</strong></td>
+          </tr>
+          <tr>
+            <td><strong>2. Trial (Ürün Denemesi)</strong></td>
+            <td>Emergency Cool-Down Pod Deneyim & Numune</td>
+            <td>IoT Kabin Sensörü & Otomat Sayacı</td>
+            <td><strong>50.000+ Numune</strong></td>
+          </tr>
+          <tr>
+            <td><strong>3. Purchase (Satışa Dönüşüm)</strong></td>
+            <td>QR Kodlu Numune Tarama & İlk Satın Alma Oranı</td>
+            <td>Lokasyon Bazlı Dinamik UTM/QR</td>
+            <td><strong>>%28 Tarama / >%12 Satış</strong></td>
+          </tr>
+          <tr>
+            <td><strong>3. Purchase (Satışa Dönüşüm)</strong></td>
+            <td>Soğutucu Dolap POSM Perakende Satış Artışı</td>
+            <td>Test vs. Kontrol Mağaza Kasa Verisi</td>
+            <td><strong>+%22 Hacim Artışı</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (04:25 - 04:45):</strong> "Başarıyı varsayımlarla değil mühendislik metrikleriyle ölçüyoruz: 75 bin organik UGC, 50 bin izlenebilir QR numune, %28 QR tarama oranı ve soğutucu stant bulunan mağazalarda +%22 satış artışı hedefliyoruz."
+      </div>
+    </div>
+
+    <!-- SLIDE 10: COMPLIANCE & CLOSING -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="rubric-tag">P&G DO's & DON'Ts Denetimi • Kapanış</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Slayt 10 / 10 • Özet & Jüri Q&A</span>
+      </div>
+      <h2>P&G Altın Kuralları Uyumluluğu ve Kapanış</h2>
+      <div class="grid-2">
+        <div class="p-card">
+          <h3>✅ P&G DO's & DON'Ts Kontrol Listesi</h3>
+          <ul>
+            <li>✅ <strong>Tüketici zorluğu üzerinde uzlaşıldı mı?</strong> Evet — Zihinsel ve fiziksel <em>Hararet</em> anı.</li>
+            <li>✅ <strong>Tek bir net slogan var mı?</strong> Evet — <em>"Harareti Kes, -5°C Hissine Geç!"</em></li>
+            <li>✅ <strong>Aktivasyonlar ana fikirle birleşik mi?</strong> Evet — AR Filtre, Soğutma Kabini ve Soğutucu Raf tek bir sistemdir.</li>
+            <li>✅ <strong>Yeni ürün iddiası uydurmaktan kaçınıldı mı?</strong> Evet — <em>-5°C</em> daima <strong>"Ferahlık Hissi"</strong> olarak konumlandırıldı.</li>
+          </ul>
+        </div>
+        <div class="p-card">
+          <h3>💰 Optimal Bütçe Dağılımı</h3>
+          <ul>
+            <li><strong>%40 Faz 2 (Cool-Down Pods & 50K QR Numune):</strong> Doğrudan ürün denemesi.</li>
+            <li><strong>%35 Faz 1 (AR Filtre & Influencer Seeding):</strong> Milyonluk organik konuşulabilirlik.</li>
+            <li><strong>%20 Faz 3 (Soğutucu POSM & Quick-Commerce):</strong> Kasada satışa dönüşüm.</li>
+            <li><strong>%5 Faz 4 (QR Telemetri & A/B Analitik):</strong> Gerçek zamanlı optimizasyon.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero-slogan" style="margin-top: 1.2rem; font-size: 1.5rem;">
+        Teşekkürler! • "Harareti Kes, -5°C Hissine Geç!" 🧊
+      </div>
+      <div class="speaker-notes">
+        <strong>🎤 Konuşmacı Notu (04:45 - 05:00):</strong> "P&G DO's ve DON'Ts prensiplerine %100 uyumlu, tek bir büyük fikir etrafında kenetlenmiş Project-Minus5 ile Z kuşağının hararetini kesmeye hazırız. Sorularınızı yanıtlamaktan mutluluk duyarız!"
+      </div>
+    </div>
+  </div>
+
+  <div class="deck-footer">
+    <button class="ctrl-btn secondary" onclick="changeSlide(-1)">⬅️ Önceki Slayt (Sol Ok)</button>
+    <div style="display:flex; align-items:center; flex:1; justify-content:center;">
+      <span id="slideCounter" style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">1 / 10</span>
+      <div class="progress-bar-wrap">
+        <div id="progressBar" class="progress-bar-fill"></div>
+      </div>
+      <span style="font-size:0.78rem; color:var(--text-muted);">Klavye: ⬅️ ➡️ veya Boşluk</span>
+    </div>
+    <button class="ctrl-btn" onclick="changeSlide(1)">Sonraki Slayt (Sağ Ok) ➡️</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function updateDeck() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+      document.getElementById('progressBar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+    }
+
+    function changeSlide(dir) {
+      currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+      updateDeck();
+    }
+
+    function toggleNotes() {
+      document.querySelectorAll('.speaker-notes').forEach(n => n.classList.toggle('hidden'));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        changeSlide(1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        changeSlide(-1);
+      } else if (e.key.toLowerCase() === 'n') {
+        toggleNotes();
+      }
+    });
+
+    // 5-Minute Pitch Countdown Timer
+    let remainingSec = 300;
+    let timerInterval = null;
+
+    function formatTime(sec) {
+      const m = String(Math.floor(sec / 60)).padStart(2, '0');
+      const s = String(sec % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('timerBtn');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.textContent = 'Devam Et';
+      } else {
+        btn.textContent = 'Duraklat';
+        timerInterval = setInterval(() => {
+          if (remainingSec > 0) {
+            remainingSec--;
+            document.getElementById('pitchTimer').textContent = formatTime(remainingSec);
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            btn.textContent = 'Süre Doldu!';
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      remainingSec = 300;
+      document.getElementById('pitchTimer').textContent = '05:00';
+      document.getElementById('timerBtn').textContent = 'Başlat';
+    }
+  </script>
+</body>
+</html>

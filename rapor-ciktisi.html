@@ -24,8 +24,8 @@
     body {
       background: #e2e8f0;
       color: var(--dark);
-      line-height: 1.55;
-      padding: 2rem 1rem;
+      line-height: 1.52;
+      padding: 1.5rem 1rem;
     }
 
     .toolbar {
@@ -38,6 +38,24 @@
       color: #fff;
       padding: 0.85rem 1.25rem;
       border-radius: 10px;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .btn-link {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.55rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
     }
 
     .btn-print {
@@ -48,37 +66,37 @@
       border-radius: 8px;
       font-weight: 800;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .page {
       max-width: 210mm;
       margin: 0 auto;
       background: #ffffff;
-      padding: 18mm 18mm;
+      padding: 16mm 17mm;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       border-radius: 6px;
     }
 
     .report-header {
       border-bottom: 3px solid var(--primary);
-      padding-bottom: 1rem;
-      margin-bottom: 1.35rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
     }
 
     .report-header h1 {
-      font-size: 1.55rem;
+      font-size: 1.5rem;
       color: var(--primary);
       line-height: 1.2;
     }
 
     .report-header .sub {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--muted);
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
     }
 
     .score-pill {
@@ -86,7 +104,7 @@
       color: #fff;
       padding: 0.35rem 0.85rem;
       border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       white-space: nowrap;
     }
@@ -94,13 +112,13 @@
     .slogan-banner {
       background: linear-gradient(90deg, #eff6ff, #e0f2fe);
       border-left: 5px solid var(--accent);
-      padding: 0.9rem 1.25rem;
-      margin-bottom: 1.4rem;
+      padding: 0.8rem 1.15rem;
+      margin-bottom: 1.25rem;
       border-radius: 0 8px 8px 0;
     }
 
     .slogan-banner .slogan-title {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--primary);
@@ -108,14 +126,14 @@
     }
 
     .slogan-banner .slogan-text {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: #0369a1;
-      margin: 0.15rem 0;
+      margin: 0.1rem 0;
     }
 
     .section {
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.25rem;
     }
 
     .section-title {
@@ -124,9 +142,9 @@
       align-items: center;
       background: var(--bg-light);
       border-left: 4px solid var(--primary);
-      padding: 0.45rem 0.85rem;
-      margin-bottom: 0.75rem;
-      font-size: 1.05rem;
+      padding: 0.4rem 0.8rem;
+      margin-bottom: 0.65rem;
+      font-size: 1rem;
       font-weight: 800;
       color: var(--primary);
     }
@@ -136,35 +154,35 @@
       color: var(--primary);
       padding: 0.15rem 0.55rem;
       border-radius: 4px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
     }
 
     p {
-      font-size: 0.9rem;
-      margin-bottom: 0.55rem;
+      font-size: 0.88rem;
+      margin-bottom: 0.5rem;
       text-align: justify;
     }
 
     ul {
-      padding-left: 1.25rem;
-      margin-bottom: 0.65rem;
+      padding-left: 1.2rem;
+      margin-bottom: 0.55rem;
     }
 
     li {
-      font-size: 0.88rem;
-      margin-bottom: 0.35rem;
+      font-size: 0.86rem;
+      margin-bottom: 0.3rem;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 0.65rem 0 0.85rem;
-      font-size: 0.83rem;
+      margin: 0.55rem 0 0.75rem;
+      font-size: 0.81rem;
     }
 
     th, td {
       border: 1px solid var(--border);
-      padding: 0.5rem 0.65rem;
+      padding: 0.45rem 0.6rem;
       text-align: left;
       vertical-align: top;
     }
@@ -178,16 +196,16 @@
     .checklist {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0.6rem;
-      margin-top: 0.5rem;
+      gap: 0.55rem;
+      margin-top: 0.45rem;
     }
 
     .check-item {
       background: #f8fafc;
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 0.55rem 0.75rem;
-      font-size: 0.82rem;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.8rem;
     }
 
     @media print {
@@ -209,25 +227,29 @@
 <body>
   <div class="toolbar">
     <div>
-      <strong>📄 Project-Minus5 — Resmi Yarışma & Sunum Çıktısı</strong>
-      <div style="font-size: 0.8rem; color: #94a3b8;">A4 PDF olarak kaydetmek veya yazdırmak için sağdaki butona tıklayın (veya Ctrl + P).</div>
+      <strong>📄 Project-Minus5 — Resmi Yarışma & Jüri Sunum Çıktısı (A4 PDF)</strong>
+      <div style="font-size: 0.78rem; color: #94a3b8;">A4 PDF olarak kaydetmek veya yazdırmak için sağdaki butona tıklayın (Ctrl + P).</div>
     </div>
-    <button class="btn-print" onclick="window.print()">🖨️ PDF Olarak Kaydet / Yazdır</button>
+    <div class="toolbar-actions">
+      <a href="index.html" class="btn-link">🖥️ Canlı Simülatör</a>
+      <a href="sunum-deck.html" class="btn-link">🎤 5 Dk Sunum (Deck)</a>
+      <button class="btn-print" onclick="window.print()">🖨️ PDF Olarak Kaydet / Yazdır</button>
+    </div>
   </div>
 
   <div class="page">
     <div class="report-header">
       <div>
         <h1>🧊 PROJECT-MINUS5: H&S BUZLU MENTOL FERAHLIĞI</h1>
-        <div class="sub">P&G WHO / WHAT / HOW / SUCCESS Brand Building Framework — 360° Talkability & Deneme Planı</div>
+        <div class="sub">P&G WHO / WHAT / HOW / SUCCESS Brand Building Framework — 360° Talkability, Deneme & Satış Planı</div>
       </div>
       <div class="score-pill">100 PUANLIK TAM ÇERÇEVE</div>
     </div>
 
     <div class="slogan-banner">
-      <div class="slogan-title">Büyük Yaratıcı Fikir & Kampanya Sloganı</div>
+      <div class="slogan-title">Büyük Yaratıcı Fikir & Çatı Kampanya Sloganı</div>
       <div class="slogan-text">"Harareti Kes, -5°C Hissine Geç!"</div>
-      <div style="font-size: 0.78rem; color: var(--muted);">
+      <div style="font-size: 0.76rem; color: var(--muted);">
         *Yasal/Klinik Uyumluluk Notu: -5°C gerçek bir sıcaklık düşüşü değil, ürünün mentol formülüyle saç derisinde yarattığı benzersiz ferahlık hissidir.
       </div>
     </div>
@@ -242,15 +264,15 @@
         <strong>Hedef Kitle (Target Audience):</strong> 18–24 yaş arası, sürekli hareket halinde olan, hem zihinsel hem de fiziksel olarak sınırlarını zorlayan Z kuşağı üniversite öğrencileri, genç yazılımcılar/mühendisler ve aktif spor yapan gençler.
       </p>
       <p>
-        <strong>Tüketici İçgörüsü (Consumer Insight):</strong> Gençlerin hayatı <strong>"hararetli"</strong> (ısı, stres, zihinsel yük ve ter dolu) anlarla şekilleniyor. Bazen <strong>Cumhurbaşkanlığı Millet Kütüphanesi</strong>'nde saatler süren vize/final veya kodlama süreçlerinde zihinleri alev alıyor; bazen saatlerce süren siber güvenlik bayrağı yakalama (<strong>CTF</strong>) ve Hackathon yarışmalarında sistemleri gibi kendi beyinleri de ısınıyor; bazen de spor salonunda ağır <em>squat</em> veya <em>bench press</em> antrenmanları sonrasında fiziksel olarak bunalıyorlar. Bu yoğun anlarda ter, saç derisinde rahatsızlık ve potansiyel kepek problemi birleştiğinde, o "yanma" hissinden kurtulup anında bir <strong>"sistem sıfırlamasına (reset)"</strong> ihtiyaç duyuyorlar.
+        <strong>Tüketici İçgörüsü (Consumer Insight):</strong> Gençlerin hayatı <strong>"hararetli"</strong> (ısı, stres, zihinsel yük ve ter dolu) anlarla şekilleniyor. Bazen <strong>Cumhurbaşkanlığı Millet Kütüphanesi</strong>'nde saatler süren vize/final veya kodlama süreçlerinde zihinleri alev alıyor; bazen saatlerce süren siber güvenlik bayrağı yakalama (<strong>CTF</strong>) ve Hackathon yarışmalarında sistemleri gibi kendi beyinleri de ısınıyor; bazen de spor salonunda ağır <em>squat</em> veya <em>bench press</em> antrenmanları sonrasında fiziksel olarak bunalıyorlar. Bu yoğun anlarda ter, saç derisinde rahatsızlık ve potansiyel kepek problemi birleştiğinde, o "yanma" hissinden kurtulup anında bir <strong>"sistem sıfırlamasına (system reset / cold boot)"</strong> ihtiyaç duyuyorlar.
       </p>
       <p>
-        <strong>Neden Head & Shoulders? (RTB):</strong> Çünkü H&S Buzlu Mentol Ferahlığı, kepeğe karşı kanıtlanmış korumasının yanında, mentol kristalleri içeren formülüyle onlara suyla temas ettiği anda ihtiyaç duydukları <strong>"-5°C ferahlık hissini"</strong> sunuyor.
+        <strong>Neden Head & Shoulders Buzlu Mentol Ferahlığı? (RTB):</strong> Kepeğe karşı klinik olarak kanıtlanmış (%100'e kadar kepeksiz) korumasının yanında, mentol kristalleri içeren formülüyle suyla temas ettiği anda saç derisindeki soğuk algılayıcı reseptörleri (TRPM8) uyararak onlara ihtiyaç duydukları <strong>"-5°C ferahlık hissini"</strong> sunuyor.
       </p>
       <table>
         <thead>
           <tr>
-            <th>Persona</th>
+            <th>Çekirdek Persona</th>
             <th>Hararet Anı (Tetikleyici)</th>
             <th>Doğal Argo / Söylem</th>
             <th>H&S Buzlu Mentol Rolü</th>
@@ -291,38 +313,38 @@
       <ul>
         <li><strong>Büyük Yaratıcı Fikir (Big Creative Idea):</strong> Şampuanı sadece pasif bir "temizlik ürünü" olmaktan çıkarıp, gençlerin hararet yaptığı anlarda basacakları bir <strong>"Soğutma Butonu / Emergency Cool-Down"</strong> olarak konumlandırıyoruz.</li>
         <li><strong>Kampanya Sloganı:</strong> <strong><em>"Harareti Kes, -5°C Hissine Geç!"</em></strong></li>
-        <li><strong>Neden Konuşulur? (Talkability):</strong> Gençler gündelik hayatta bunaldıklarında veya çok yorulduklarında birbirlerine zaten <em>"hararet yapma"</em>, <em>"kafanı soğut"</em> derler. Slogan bu doğal argoyu sahiplenerek günlük sohbetlerin organik bir parçası haline gelir. Ayrıca Termal Kırmızı (Hararet) ile Buz Mavisi (-5°C Hissi) arasındaki görsel kontrast sosyal medyada anında dikkat çeker.</li>
+        <li><strong>Neden Konuşulur? (Talkability Matematiği):</strong> Gençler gündelik hayatta bunaldıklarında veya çok yorulduklarında birbirlerine zaten <em>"hararet yapma"</em>, <em>"kafanı soğut"</em> derler. Slogan bu doğal argoyu sahiplenerek günlük sohbetlerin organik bir parçası haline gelir. Kızılötesi Termal Kırmızı (Hararet) ile Buz Mavisi (-5°C Hissi) arasındaki görsel kontrast sosyal medyada ilk saniyede kaydırmayı durdurur (scroll-stopping).</li>
       </ul>
     </div>
 
     <!-- 3. HOW -->
     <div class="section">
       <div class="section-title">
-        <span>3. HOW — Konuşulabilir 360-Derece Entegre Plan</span>
+        <span>3. HOW — Konuşulabilir 360-Derece Entegre Plan ve Bütçe Mimarisi</span>
         <span class="pts">20 PUAN</span>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Faz & Mecra</th>
+            <th>Faz & Bütçe Payı</th>
             <th>Aktivasyon & İşleyiş Mekanizması</th>
             <th>Talkability & Satışa Dönüşüm Rolü</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Faz 1: Dijital & AR</strong><br/>(Konuşmayı Başlatma)</td>
+            <td><strong>Faz 1: Dijital & AR</strong><br/>(%35 Bütçe Payı)</td>
             <td><strong>TikTok & IG "Termal Kamera" AR Filtresi:</strong> Kullanıcı filtreyi açtığında kafası kırmızı/turuncu (hararetli) görünür. Kafasını salladığında ekran buzlanır ve filtre <em>"-5°C Modu Aktif"</em> yazısıyla buz mavisi görünüme geçer.</td>
             <td>Gençler final haftalarında, CTF/hackathonlarda ve antrenman sonrasında <em>"Benim hararet tavan yaptı, -5°C hissine geçiyorum #HararetiKes"</em> diyerek organik UGC üretir.</td>
           </tr>
           <tr>
-            <td><strong>Faz 2: Gerilla & Kampüs</strong><br/>(Fiziksel Deneyim)</td>
+            <td><strong>Faz 2: Gerilla & Kampüs</strong><br/>(%40 Bütçe Payı)</td>
             <td><strong>"Acil Durum Ferahlama Kabinleri" (Emergency Cool-Down Pods):</strong> ODTÜ, İTÜ, Millet Kütüphanesi ve büyük spor salonu çıkışlarına soğuk hava + mentol kokusu üfleyen, slow-mo video çeken interaktif kabinler kurulur.</td>
-            <td>Gençler 10 sn ferahlama deneyimi yaşar, ağır çekim videolarını indirir ve <strong>üzerinde dinamik QR kod bulunan 90 ml seyahat boyu numune (sample)</strong> alırlar.</td>
+            <td>Gençler 10 sn 4D ferahlama deneyimi yaşar, ağır çekim videolarını indirir ve <strong>üzerinde dinamik QR kod bulunan 90 ml seyahat boyu numune (50.000 adet)</strong> alırlar.</td>
           </tr>
           <tr>
-            <td><strong>Faz 3: Perakende & E-Ticaret</strong><br/>(Satın Almaya Yönlendirme)</td>
-            <td><strong>"Soğutucu Dolap" Görünümlü POSM Stantlar:</strong> Marketlerde kişisel bakım reyonlarında buzdolabı hissiyatı veren özel LED aydınlatmalı stantlar ve Hızlı Ticaret (Getir/Trendyol Go) gece kahve/enerji içeceği sepet entegrasyonu.</td>
+            <td><strong>Faz 3: Perakende & Hızlı Ticaret</strong><br/>(%20 Bütçe + %5 Analitik)</td>
+            <td><strong>"Soğutucu Dolap" Görünümlü POSM Stantlar:</strong> Marketlerde kişisel bakım reyonlarında buzdolabı hissiyatı veren özel LED aydınlatmalı stantlar ve Getir/Trendyol Go gece kahve/enerji içeceği sepet entegrasyonu.</td>
             <td>Dijitalde ve kampüste yaratılan sohbeti (talkability) alışveriş anında doğrudan ürünü denemeye ve tam boy satın almaya (trial/purchase) dönüştürür.</td>
           </tr>
         </tbody>
@@ -332,27 +354,47 @@
     <!-- 4. SUCCESS -->
     <div class="section">
       <div class="section-title">
-        <span>4. SUCCESS — Başarı Ölçütleri (KPIs) ve Uyumluluk</span>
+        <span>4. SUCCESS — Başarı Ölçütleri (KPIs), Duyarlılık Analizi ve Uyumluluk</span>
         <span class="pts">5 PUAN</span>
       </div>
       <table>
         <thead>
           <tr>
-            <th>KPI Kategorisi</th>
-            <th>Takip Edilen Mühendislik & Pazarlama Metrikleri</th>
-            <th>12 Haftalık Hedef Benchmark</th>
+            <th>KPI Kategorisi & Metrik</th>
+            <th>Ölçüm Aracı / Veri Kaynağı</th>
+            <th>Muhafazakar</th>
+            <th>🎯 Baz Hedef (12 Hafta)</th>
+            <th>Viral Patlama</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>1. Konuşulabilirlik (Talkability KPIs)</strong></td>
-            <td>• Termal Kamera AR filtresinin kullanım ve organik paylaşım (UGC) sayısı<br/>• <code>#HararetiKes</code> etiketinin sosyal medya erişimi ve etkileşim (engagement) oranı</td>
-            <td>• <strong>75.000+</strong> Organik UGC<br/>• <strong>5M+</strong> Erişim / <strong>>%6.5</strong> ER</td>
+            <td><strong>1. <code>#HararetiKes</code> Organik UGC Sayısı</strong></td>
+            <td>TikTok & Meta Spark AR Analitiği</td>
+            <td>42.000</td>
+            <td><strong>75.000+ Paylaşım</strong></td>
+            <td>145.000+</td>
           </tr>
           <tr>
-            <td><strong>2. Deneme & Satın Alma (Trial & Purchase KPIs)</strong></td>
-            <td>• Fiziksel kabinlerde dağıtılan 50.000 QR kodlu numunenin taranma ve kupona dönüşüm oranı<br/>• "Soğutucu Dolap POSM" bulunan perakende noktalarında gerçekleşen satış hacmi artışı</td>
-            <td>• <strong>>%28</strong> QR Tarama / <strong>>%12</strong> İlk Satış<br/>• <strong>+%22</strong> Perakende Hacim Artışı</td>
+            <td><strong>2. Toplam Dijital Erişim & Etkileşim (ER)</strong></td>
+            <td>Brandwatch / Sosyal Dinleme</td>
+            <td>3.2M / %4.8</td>
+            <td><strong>5.0M+ / >%6.5 ER</strong></td>
+            <td>9.5M+ / %8.9</td>
+          </tr>
+          <tr>
+            <td><strong>3. Cool-Down Pod QR Numune & Tarama</strong></td>
+            <td>IoT Otomat & Dinamik UTM/QR</td>
+            <td>40K (%20 Scan)</td>
+            <td><strong>50.000 (%28+ Scan)</strong></td>
+            <td>60K (%38 Scan)</td>
+          </tr>
+          <tr>
+            <td><strong>4. Soğutucu POSM Perakende Satış Artışı</strong></td>
+            <td>Test vs. Kontrol Mağaza Kasa Verisi</td>
+            <td>+%14.5</td>
+            <td><strong>+%22.4 Hacim Artışı</strong></td>
+            <td>+%31.0</td>
           </tr>
         </tbody>
       </table>

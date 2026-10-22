@@ -2,7 +2,7 @@
 
 **Proje Adı:** Project-Minus5 (H&S Buzlu Mentol Ferahlığı Kampanyası)  
 **Proje Amacı:** Head & Shoulders Buzlu Mentol Ferahlığı şampuanını, 18–24 yaş arası gençler arasında organik olarak konuşulan (talkable), denemeye teşvik eden (trial-driving) ve markaya yeni kullanıcılar kazandıran (user acquisition) kültürel bir fenomene dönüştürmek.  
-**Temel Çerçeve:** P&G WHO / WHAT / HOW / SUCCESS Brand Building Framework (100 Puan).  
+**Temel Çerçeve:** P&G WHO (30 Puan) / WHAT (45 Puan) / HOW (20 Puan) / SUCCESS (5 Puan) Brand Building Framework (Toplam 100 Puan).  
 **Kampanya Ana Sloganı:** *"Harareti Kes, -5°C Hissine Geç!"*
 
 ---
@@ -26,7 +26,7 @@ Bu yoğun anlarda ter, saç derisinde yanma/kaşıntı hissi, ağırlaşmış sa
 3. **Sosyal Hiperaktif (Kampüs & Festival Gezgini):** Gün boyu ders, kulüp etkinliği ve koşturmaca sonrası akşam buluşmasına çıkmadan önce *"Bi' kafayı soğutalım"* diyerek anında tazelik ve %100'e kadar kepeksiz özgüven arayan genç.
 
 ### Neden Head & Shoulders Buzlu Mentol Ferahlığı? (Reason to Believe)
-Çünkü H&S Buzlu Mentol Ferahlığı, kepeğe karşı klinik olarak kanıtlanmış etkili korumasının yanında, mentol kristalleri içeren formülüyle suyla temas ettiği anda saç derisindeki soğuk algılayıcı reseptörleri uyararak gençlere ihtiyaç duydukları o **"-5°C ferahlık hissini"** sunuyor.  
+Çünkü H&S Buzlu Mentol Ferahlığı, kepeğe karşı klinik olarak kanıtlanmış (%100'e kadar kepeksiz) korumasının yanında, mentol kristalleri içeren formülüyle suyla temas ettiği anda saç derisindeki soğuk algılayıcı reseptörleri (TRPM8) uyararak gençlere ihtiyaç duydukları o **"-5°C ferahlık hissini"** sunuyor.  
 *(Not: Bu gerçek bir sıcaklık düşüşü değil, ürünün saç derisinde yarattığı benzersiz bir duyusal ferahlık hissidir.)*
 
 ---
@@ -60,7 +60,7 @@ Snickers'ın *"Açken sen sen değilsin"* veya Popeyes'ın *"Terbiyesiz tavuk"* 
 
 Tüketicinin markayla temas ettiği tüm noktaları (touchpoints) optimize eden, birbirinden kopuk olmayan ve tamamı **"harareti kesme"** ana fikrine hizmet eden **üç fazlı entegre bir sistem** tasarlıyoruz:
 
-### Faz 1: Dijital Etkileşim ve AR (Konuşmayı Başlatma)
+### Faz 1: Dijital Etkileşim ve AR (Konuşmayı Başlatma — %35 Bütçe Payı)
 * **Aksiyon:** TikTok ve Instagram için özel **"Termal Kamera" Artırılmış Gerçeklik (AR) Filtresi** ve `#HararetiKes` akımı.
 * **İşleyiş:**
   1. Kullanıcı filtreyi açtığında kafası **kırmızı/turuncu (hararetli termal görünümde)** görünür ve ekranda `[HARARET: %99 🔥]` uyarısı yer alır.
@@ -69,7 +69,7 @@ Tüketicinin markayla temas ettiği tüm noktaları (touchpoints) optimize eden,
   * Gençler final haftalarında, Hackathon/CTF yarışmalarında veya zorlu antrenmanlar sonrasında bu filtreyi kullanarak *"Benim hararet tavan yaptı, -5°C hissine geçiyorum"* diyerek kendi durumlarını paylaşırlar.
   * Kampüs mizah sayfaları, fitness içerik üreticileri ve üniversite teknoloji/espor kulüpleriyle eş zamanlı tohumlama yapılır.
 
-### Faz 2: Gerilla Pazarlama ve Kampüs Aktivasyonları (Fiziksel Deneyim)
+### Faz 2: Gerilla Pazarlama ve Kampüs Aktivasyonları (Fiziksel Deneyim — %40 Bütçe Payı)
 * **Aksiyon:** **"Acil Durum Ferahlama Kabinleri" (Emergency Cool-Down Pods)**.
 * **İşleyiş:**
   * Üniversite kampüslerine (örneğin **ODTÜ**, İTÜ, Boğaziçi merkezi noktalarına, **Cumhurbaşkanlığı Millet Kütüphanesi** çıkışına) ve büyük spor salonlarının (MACFit vb.) çıkışlarına içi soğuk hava ve ferah mentol kokusu üfleyen interaktif kabinler yerleştirilir.
@@ -77,29 +77,26 @@ Tüketicinin markayla temas ettiği tüm noktaları (touchpoints) optimize eden,
   * İçerideki **"Harareti Kes"** butonuna basıldığında **10 saniyelik 4 boyutlu deneyim** (saç derisine soğuk hava jetleri, doğal mentol kokusu nebulizatörü, buz mavisi LED ışık şovu ve buzlanma ses efekti) başlar.
   * Kabin içindeki kamera, soğuk rüzgarla saçları uçuşan gencin 5 saniyelik ağır çekim (slow-motion) videosunu çeker ve QR kod ile telefonuna aktarır.
 * **Talkability & Numune (Trial):**
-  * Deneyim sonunda akıllı otomat bölmesinden, üzerinde **lokasyona özel dinamik QR kod** bulunan **90 ml seyahat boyu H&S Buzlu Mentol numunesi (sample)** verilir. Bu sıra dışı deneyim, gençlere çevrelerine anlatmaları ve sosyal medyada paylaşmaları için güçlü bir "anlatma sebebi (reason to share)" verir.
+  * Deneyim sonunda akıllı otomat bölmesinden, üzerinde **lokasyona özel dinamik QR kod** bulunan **90 ml seyahat boyu H&S Buzlu Mentol numunesi (50.000 adet)** verilir. Bu sıra dışı deneyim, gençlere çevrelerine anlatmaları ve sosyal medyada paylaşmaları için güçlü bir "anlatma sebebi (reason to share)" verir.
 
-### Faz 3: Perakende (Retail) ve Satın Almaya Yönlendirme (Conversion)
+### Faz 3: Perakende (Retail) ve Satın Almaya Yönlendirme (Conversion — %20 Bütçe + %5 Analitik)
 * **Aksiyon:** Marketlerdeki kişisel bakım reyonlarında **"Soğutucu Dolap (Cooler Stand)"** görünümlü özel POSM stantlar ve Hızlı Ticaret (Quick-Commerce) entegrasyonu.
 * **İşleyiş:**
-  * Dijitalde ve kampüste yaratılan sohbeti (talkability) ürünü satın almaya (purchase) dönüştürmek için, H&S Buzlu Mentol Ferahlığı reyonlarda standart şampuan raflarında değil; **buzdolabı/içecek soğutucusu hissiyatı veren**, buğulu cam detaylı ve buz mavisi LED aydınlatmalı özel stantlarda sergilenir.
+  * Dijitalde ve kampüste yaratılan sohbeti (talkability) ürünü satın almaya (purchase) dönüştürmek için, H&S Buzlu Mentol Ferahlığı reyonlarda standart şampuan raflarında değil; **buzdolabı/içecek soğutucusu hissiyatı veren**, buğulu cam detaylı, kapak açıldığında soğuk rüzgar sesi veren ve buz mavisi LED aydınlatmalı özel stantlarda sergilenir.
   * Getir, Trendyol Go ve Yemeksepeti Market gibi hızlı ticaret uygulamalarında gece geç saatte soğuk kahve/enerji içeceği veya antrenman sonrası protein sütü sipariş eden kullanıcılara sepette *"Kafanı da Soğut: H&S Buzlu Mentol %25 İndirimli"* çapraz satış (cross-sell) önerisi sunulur.
 
 ---
 
-## 4. SUCCESS — BAŞARI ÖLÇÜTLERİ (KPIs) (5 PUAN)
+## 4. SUCCESS — BAŞARI ÖLÇÜTLERİ (KPIs) VE SENARYO ANALİZİ (5 PUAN)
 
 Sistemin başarısını rastgele değil, konuşulabilirliği (Talkability) ürün denemesine (Trial) ve satışa (Purchase) bağlayan ölçülebilir mühendislik metrikleriyle takip ediyoruz:
 
-### 1. Konuşulabilirlik Metrikleri (Talkability KPIs)
-* **AR Filtre & UGC Üretimi:** TikTok ve Instagram'da Termal Kamera AR filtresinin kullanım ve organik paylaşım (UGC) sayısı *(Hedef: 75.000+ organik paylaşım)*.
-* **Erişim ve Etkileşim Oranı:** Kampanya etiketinin (`#HararetiKes`) sosyal medyadaki toplam erişimi *(Hedef: 5.000.000+)* ve etkileşim oranı *(Hedef: >%6.5 Engagement Rate)*.
-* **Kabin Video Paylaşım Oranı:** Ferahlama kabinlerinde çekilen slow-motion videoların QR kod ile indirilip paylaşılma oranı *(Hedef: >%45)*.
-
-### 2. Deneme ve Satın Alma Metrikleri (Trial & Purchase KPIs)
-* **Fiziksel Deneyim ve Numune Sayısı:** *Emergency Cool-Down Pod* kabinlerinde tamamlanan deneyim ve dağıtılan seyahat boyu numune adedi *(Hedef: 50.000+ numune)*.
-* **QR Kod Dönüşüm Oranı (Scan-to-Purchase):** Fiziksel kabinlerde dağıtılan lokasyon bazlı QR kodlu numunelerin taranma oranı *(Hedef: >%28)* ve QR kod içindeki indirim kuponuyla tam boy ürünü satın alma oranı *(Hedef: >%12 doğrudan ilk satın alma)*.
-* **Perakende Satış Hacmi Artışı (Sales Uplift):** Kampanya süresince "Soğutucu Dolap POSM" bulunan perakende noktalarında kontrol mağazalarına kıyasla gerçekleşen SKU bazlı satış hacmi artışı *(Hedef: +%22 satış artışı)*.
+| KPI Kategorisi & Metrik | Ölçüm Yöntemi | Muhafazakar | 🎯 Baz Hedef (12 Hafta) | Viral Patlama |
+| :--- | :--- | :---: | :---: | :---: |
+| **1. `#HararetiKes` Organik UGC** | TikTok & IG AR Analitiği | 42.000 | **75.000+ Paylaşım** | 145.000+ |
+| **2. Dijital Erişim & Etkileşim (ER)** | Sosyal Medya Dinleme | 3.2M / %4.8 | **5.0M+ / >%6.5 ER** | 9.5M+ / %8.9 |
+| **3. Kabin QR Numune & Tarama** | IoT Otomat & Dinamik QR | 40K (%20 Scan) | **50.000 (%28+ Scan)** | 60K (%38 Scan) |
+| **4. Soğutucu POSM Satış Artışı** | Test vs. Kontrol Mağaza Verisi | +%14.5 | **+%22.4 Hacim Artışı** | +%31.0 |
 
 ---
 

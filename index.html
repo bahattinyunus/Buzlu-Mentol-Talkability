@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project-Minus5 | H&S Buzlu Mentol Ferahlığı — 360° Talkability Hub</title>
+  <title>Project-Minus5 | H&S Buzlu Mentol Ferahlığı — 360° İnteraktif Komuta Merkezi</title>
   <style>
     :root {
-      --bg-dark: #060b16;
-      --bg-card: #0d1629;
-      --bg-card-hover: #13203b;
+      --bg-dark: #050a14;
+      --bg-card: #0c1528;
+      --bg-card-hover: #12203d;
       --ice-blue: #00e5ff;
       --ice-deep: #0077ff;
       --heat-red: #ff3b30;
       --heat-orange: #ff9500;
+      --emerald: #10b981;
       --text-main: #f0f6fc;
-      --text-muted: #8b9bb4;
-      --border-color: rgba(0, 229, 255, 0.22);
-      --accent-glow: 0 0 25px rgba(0, 229, 255, 0.35);
+      --text-muted: #94a3b8;
+      --border-color: rgba(0, 229, 255, 0.24);
+      --accent-glow: 0 0 28px rgba(0, 229, 255, 0.32);
     }
 
     * {
@@ -26,25 +27,100 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: radial-gradient(circle at top right, #0a1931 0%, var(--bg-dark) 65%);
+      background: radial-gradient(circle at top right, #0a1b38 0%, var(--bg-dark) 65%);
       color: var(--text-main);
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1200px;
+    /* Sticky Top Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 10, 20, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .navbar-inner {
+      max-width: 1260px;
       margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--ice-blue);
+      background: rgba(0, 229, 255, 0.1);
+    }
+
+    .nav-cta {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 198, 255, 0.35);
+    }
+
+    .nav-cta.outline {
+      background: rgba(0, 229, 255, 0.12);
+      border: 1px solid var(--ice-blue);
+      color: var(--ice-blue);
+      box-shadow: none;
+    }
+
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
     }
 
     header {
       text-align: center;
-      padding: 2.5rem 1rem;
+      padding: 2.25rem 1rem 2rem;
       border-bottom: 1px solid var(--border-color);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.25rem;
     }
 
     .badge {
@@ -54,18 +130,18 @@
       background: rgba(0, 229, 255, 0.12);
       border: 1px solid var(--ice-blue);
       color: var(--ice-blue);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     h1 {
-      font-size: clamp(2rem, 4.5vw, 3.3rem);
+      font-size: clamp(2rem, 4.3vw, 3.2rem);
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.65rem;
       background: linear-gradient(90deg, #ffffff, var(--ice-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -73,11 +149,11 @@
 
     .slogan-box {
       display: inline-block;
-      margin: 1rem auto;
-      padding: 0.85rem 2rem;
+      margin: 0.9rem auto;
+      padding: 0.8rem 2rem;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(255, 59, 48, 0.18), rgba(0, 229, 255, 0.22));
-      border: 1px solid rgba(0, 229, 255, 0.45);
+      background: linear-gradient(135deg, rgba(255, 59, 48, 0.18), rgba(0, 229, 255, 0.24));
+      border: 1px solid rgba(0, 229, 255, 0.5);
       box-shadow: var(--accent-glow);
       font-size: 1.35rem;
       font-weight: 800;
@@ -86,12 +162,12 @@
     .disclaimer {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 0.6rem;
+      margin-top: 0.45rem;
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 1.75rem;
       margin-bottom: 2.25rem;
     }
@@ -100,8 +176,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 1.75rem;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      padding: 1.65rem;
+      transition: border-color 0.25s ease;
     }
 
     .card:hover {
@@ -109,74 +185,101 @@
     }
 
     .card h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.85rem;
+      font-size: 1.22rem;
+      margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.6rem;
       color: var(--ice-blue);
+    }
+
+    .phase-tag {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(0, 229, 255, 0.14);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      color: var(--ice-blue);
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     /* AR Thermal Simulator */
     .ar-viewport {
       position: relative;
       border-radius: 14px;
-      padding: 1.75rem 1.4rem;
+      padding: 1.5rem 1.35rem;
       text-align: center;
-      transition: all 0.5s ease;
+      transition: all 0.45s ease;
       overflow: hidden;
-      min-height: 295px;
+      min-height: 320px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .ar-viewport.overheat {
-      background: radial-gradient(circle at center, #7a1111 0%, #330505 70%, #1a0202 100%);
+      background: radial-gradient(circle at center, #801313 0%, #360606 70%, #1a0202 100%);
       border: 2px solid var(--heat-red);
-      box-shadow: 0 0 30px rgba(255, 59, 48, 0.4);
+      box-shadow: 0 0 32px rgba(255, 59, 48, 0.42);
     }
 
     .ar-viewport.cooled {
-      background: radial-gradient(circle at center, #004e7a 0%, #031c38 70%, #020c1b 100%);
+      background: radial-gradient(circle at center, #005587 0%, #031e3d 70%, #020c1b 100%);
       border: 2px solid var(--ice-blue);
-      box-shadow: 0 0 35px rgba(0, 229, 255, 0.5);
+      box-shadow: 0 0 38px rgba(0, 229, 255, 0.52);
+    }
+
+    #arCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .ar-layer {
+      position: relative;
+      z-index: 2;
     }
 
     .hud-top {
       display: flex;
       justify-content: space-between;
       font-family: monospace;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       padding: 0.4rem 0.75rem;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .avatar-state {
-      font-size: 4rem;
-      margin: 0.9rem 0 0.4rem;
+      font-size: 3.8rem;
+      margin: 0.8rem 0 0.35rem;
       transition: transform 0.35s ease;
     }
 
     .ar-status-text {
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       letter-spacing: 0.04em;
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.4rem;
     }
 
     .btn-cool {
       cursor: pointer;
       border: none;
-      padding: 0.9rem 1.4rem;
+      padding: 0.85rem 1.25rem;
       border-radius: 10px;
-      font-size: 0.96rem;
+      font-size: 0.92rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       transition: all 0.25s ease;
-      margin-top: 1rem;
+      margin-top: 0.85rem;
       width: 100%;
     }
 
@@ -193,19 +296,20 @@
 
     .scenario-pills {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: 0.45rem;
+      margin-bottom: 0.9rem;
       flex-wrap: wrap;
     }
 
     .pill {
       flex: 1;
+      min-width: 120px;
       text-align: center;
       padding: 0.45rem 0.6rem;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: var(--text-main);
       cursor: pointer;
       transition: all 0.2s;
@@ -218,16 +322,16 @@
       font-weight: 700;
     }
 
-    /* Sliders */
+    /* Sliders & KPI */
     .slider-group {
-      margin-bottom: 1.1rem;
+      margin-bottom: 0.95rem;
     }
 
     .slider-header {
       display: flex;
       justify-content: space-between;
-      font-size: 0.88rem;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
     }
 
     input[type="range"] {
@@ -239,76 +343,189 @@
     .kpi-results {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0.8rem;
-      margin-top: 1.15rem;
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
 
     .kpi-box {
       background: rgba(0, 229, 255, 0.06);
       border: 1px solid rgba(0, 229, 255, 0.25);
       border-radius: 10px;
-      padding: 0.8rem;
+      padding: 0.75rem;
       text-align: center;
     }
 
     .kpi-val {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: var(--ice-blue);
     }
 
     .kpi-label {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
     }
 
     /* Pod QR Telemetry Simulator */
+    .pod-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    @media (max-width: 760px) {
+      .pod-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .pod-terminal {
-      background: #050a14;
+      background: #040811;
       border: 1px solid rgba(0, 229, 255, 0.35);
       border-radius: 12px;
       padding: 1rem;
       font-family: monospace;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: #a5f3fc;
-      margin-top: 0.9rem;
+      line-height: 1.65;
     }
 
-    /* Framework Cards */
+    .qr-card {
+      background: #071022;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.9rem;
+      text-align: center;
+    }
+
+    #qrCanvas {
+      background: #fff;
+      border-radius: 8px;
+      padding: 6px;
+      margin: 0.4rem auto;
+      display: block;
+    }
+
+    /* Retail Cooler Stand & Quick-Commerce Simulator */
+    .cooler-stand {
+      background: linear-gradient(180deg, #061a33 0%, #030d1c 100%);
+      border: 2px solid var(--ice-blue);
+      border-radius: 14px;
+      padding: 1.25rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.22);
+    }
+
+    .cooler-door {
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin: 0.75rem 0;
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: rgba(0, 229, 255, 0.08);
+      backdrop-filter: blur(6px);
+      transition: all 0.35s ease;
+    }
+
+    .cooler-door.opened {
+      background: rgba(0, 229, 255, 0.22);
+      box-shadow: inset 0 0 25px rgba(0, 229, 255, 0.45);
+    }
+
+    .qcomm-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0.85rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 0.55rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .qcomm-item.selected {
+      border-color: var(--ice-blue);
+      background: rgba(0, 229, 255, 0.14);
+    }
+
+    .cross-sell-banner {
+      margin-top: 0.85rem;
+      padding: 0.95rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(16, 185, 129, 0.2));
+      border: 1px solid var(--ice-blue);
+      font-size: 0.85rem;
+    }
+
+    /* Framework Cards & Q&A Accordion */
     .framework-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
       margin-top: 1rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.25rem;
     }
 
     .fw-step {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 1.35rem;
+      padding: 1.3rem;
     }
 
     .fw-score {
       display: inline-block;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
       padding: 0.2rem 0.6rem;
       border-radius: 6px;
       background: rgba(0, 229, 255, 0.15);
       color: var(--ice-blue);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
-    .fw-step h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.08rem;
+    .qa-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
     }
 
-    .fw-step p {
-      font-size: 0.86rem;
+    .qa-question {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      padding: 1rem 1.25rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .qa-question:hover {
+      color: var(--ice-blue);
+    }
+
+    .qa-answer {
+      display: none;
+      padding: 0 1.25rem 1rem;
+      font-size: 0.87rem;
       color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 0.75rem;
+    }
+
+    .qa-item.open .qa-answer {
+      display: block;
     }
 
     footer {
@@ -317,64 +534,99 @@
       padding-top: 1.5rem;
       border-top: 1px solid var(--border-color);
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
     }
   </style>
 </head>
 <body>
+  <!-- Sticky Navigation -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="brand-logo">🧊 Project-Minus5 <span class="phase-tag">100 Puanlık Mimari</span></a>
+      <div class="nav-links">
+        <a href="#ar-sim" class="nav-link">📱 Faz 1: Termal AR</a>
+        <a href="#pod-sim" class="nav-link">🧊 Faz 2: Cool-Down Pod</a>
+        <a href="#retail-sim" class="nav-link">🛒 Faz 3: Soğutucu POSM</a>
+        <a href="#kpi-sim" class="nav-link">📊 Faz 4: KPI & ROI</a>
+        <a href="#qa-matrix" class="nav-link">🛡️ Jüri Q&A</a>
+        <a href="sunum-deck.html" class="nav-cta">🎤 5 Dk Jüri Sunumu (Deck)</a>
+        <a href="rapor-ciktisi.html" class="nav-cta outline">🖨️ A4 PDF Rapor</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
     <header>
-      <span class="badge">🧊 P&G Brand Building Framework • Project-Minus5</span>
+      <span class="badge">🧊 P&G Brand Building Framework • WHO (30) / WHAT (45) / HOW (20) / SUCCESS (5)</span>
       <h1>Head & Shoulders Buzlu Mentol Ferahlığı</h1>
-      <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">
-        18–24 yaş Z kuşağının zihinsel ve fiziksel "hararet" anlarını sahiplenen, organik konuşulabilirlik (talkability) ve ürün denemesi (trial) odaklı 360° kampanya mimarisi.
+      <p style="color: var(--text-muted); max-width: 760px; margin: 0 auto;">
+        18–24 yaş Z kuşağının zihinsel ve fiziksel <strong>"hararet"</strong> anlarını sahiplenen, organik konuşulabilirlik (<em>talkability</em>) ve doğrulanabilir ürün denemesi (<em>trial</em>) odaklı 360° kampanya komuta merkezi.
       </p>
       <div class="slogan-box">"Harareti Kes, -5°C Hissine Geç!"</div>
-      <p class="disclaimer">*Not: -5°C gerçek bir sıcaklık düşüşü değil, ürünün mentol formülüyle yarattığı benzersiz ferahlık hissidir.</p>
+      <p class="disclaimer">*Yasal & Klinik Uyumluluk Notu: -5°C gerçek bir sıcaklık düşüşü değil, ürünün mentol formülüyle yarattığı benzersiz ferahlık hissidir.</p>
     </header>
 
     <div class="grid-2">
-      <!-- Interactive AR Filter Simulator -->
-      <div class="card">
-        <h2>📱 Faz 1: "Termal Kamera" AR Filtresi Simülatörü</h2>
-        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.9rem;">
-          Kullanıcının hararet anını seçin ve <strong>-5°C Ferahlık Hissi</strong> dönüşümünü test edin:
+      <!-- FAZ 1: Interactive AR Filter Simulator -->
+      <div class="card" id="ar-sim">
+        <h2>
+          <span>📱 Faz 1: "Termal Kamera" AR Filtresi Simülatörü</span>
+          <span class="phase-tag">Talkability Motoru</span>
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+          Kullanıcının hararet anını seçin, <strong>kafa sallama (Head Shake)</strong> veya soğutma butonunu tetikleyerek <strong>-5°C Ferahlık Hissi</strong> dönüşümünü test edin:
         </p>
 
         <div class="scenario-pills">
           <div class="pill active" onclick="selectScenario('ctf', this)">💻 Gece 03:00 CTF / Final</div>
-          <div class="pill" onclick="selectScenario('gym', this)">🏋️ Ağır Squat / Gym Sonrası</div>
-          <div class="pill" onclick="selectScenario('campus', this)">☀️ Kampüs & Toplu Taşıma</div>
+          <div class="pill" onclick="selectScenario('gym', this)">🏋️ Ağır Squat / Gym</div>
+          <div class="pill" onclick="selectScenario('campus', this)">☀️ Kampüs & Otobüs</div>
+          <div class="pill" onclick="selectScenario('esports', this)">🎮 Espor Turnuvası</div>
         </div>
 
         <div id="arViewport" class="ar-viewport overheat">
-          <div class="hud-top">
+          <canvas id="arCanvas" width="500" height="320"></canvas>
+          <div class="hud-top ar-layer">
             <span id="hudMode">MOD: TERMAL KAMERA 🔥</span>
-            <span id="hudMetric">HİS: HARARET TAVAN</span>
+            <span id="hudMetric">DURUM: HARARET %99</span>
           </div>
-          <div>
+          <div class="ar-layer">
             <div id="avatarIcon" class="avatar-state">🥵🔥</div>
             <div id="arStatus" class="ar-status-text">SİSTEM HARARET YAPTI!</div>
-            <p id="arDesc" style="font-size: 0.86rem; opacity: 0.9;">
+            <p id="arDesc" style="font-size: 0.85rem; opacity: 0.92; max-width: 440px; margin: 0 auto;">
               Millet Kütüphanesi'nde 12. saat... Zihin alev aldı, saç derisi bunaldı. Acil sistem sıfırlaması (reset) gerekiyor!
             </p>
+            <div id="arHashtag" style="margin-top:0.55rem; font-family:monospace; font-size:0.78rem; color:#fde047;">
+              #HararetiKes • @headandshoulderstr
+            </div>
           </div>
-          <button id="toggleBtn" class="btn-cool to-cool" onclick="toggleCoolMode()">
-            🧊 Harareti Kes (-5°C Hissine Geç!)
-          </button>
+          <div class="ar-layer" style="display:flex; gap:0.5rem;">
+            <button id="toggleBtn" class="btn-cool to-cool" onclick="toggleCoolMode()">
+              🧊 Harareti Kes (-5°C Hissine Geç!)
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Interactive KPI & Talkability ROI Calculator -->
-      <div class="card">
-        <h2>📊 Faz 4: Canlı KPI & Dönüşüm Simülatörü</h2>
-        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.9rem;">
-          360° temas noktalarının konuşulabilirlik (UGC), QR kodlu numune dönüşümü ve satış etkisini simüle edin:
+      <!-- FAZ 4: Interactive KPI & Talkability ROI Calculator -->
+      <div class="card" id="kpi-sim">
+        <h2>
+          <span>📊 Faz 4: Mühendislik KPI & Dönüşüm Simülatörü</span>
+          <span class="phase-tag">SUCCESS • 5 Puan</span>
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Senaryo modunu seçin veya kaydırıcılarla 360° temas noktalarının UGC, QR numune ve perakende satış etkisini simüle edin:
         </p>
+
+        <div class="scenario-pills">
+          <div class="pill" onclick="applyPreset(3200000, 40000, 22, this)">📉 Muhafazakar</div>
+          <div class="pill active" onclick="applyPreset(5000000, 50000, 28, this)">🎯 Baz Hedef Plan</div>
+          <div class="pill" onclick="applyPreset(9500000, 65000, 38, this)">🚀 Viral Patlama</div>
+        </div>
 
         <div class="slider-group">
           <div class="slider-header">
-            <span>📱 AR Filtre & Dijital Erişim (Görüntülenme)</span>
+            <span>📱 AR Filtre & Dijital Erişim (Reach)</span>
             <strong id="reachVal">5.000.000</strong>
           </div>
           <input type="range" id="reachSlider" min="1000000" max="15000000" step="500000" value="5000000" oninput="updateKPIs()" />
@@ -382,7 +634,7 @@
 
         <div class="slider-group">
           <div class="slider-header">
-            <span>🧊 Cool-Down Pod Fiziksel Numune (Adet)</span>
+            <span>🧊 Cool-Down Pod QR Numune (90ml Sample)</span>
             <strong id="sampleVal">50.000</strong>
           </div>
           <input type="range" id="sampleSlider" min="10000" max="150000" step="5000" value="50000" oninput="updateKPIs()" />
@@ -407,7 +659,7 @@
           </div>
           <div class="kpi-box">
             <div class="kpi-val" id="outTrialSales">6.025</div>
-            <div class="kpi-label">Doğrudan İlk Satın Alma (New User)</div>
+            <div class="kpi-label">Doğrudan İlk Tam Boy Satış (New User)</div>
           </div>
           <div class="kpi-box">
             <div class="kpi-val" id="outRetailLift">+%22.4</div>
@@ -417,49 +669,121 @@
       </div>
     </div>
 
-    <!-- Emergency Cool-Down Pod IoT Telemetry Simulator -->
-    <div class="card" style="margin-bottom: 2.25rem;">
-      <h2>🧊 Faz 2: "Emergency Cool-Down Pod" IoT Numune & QR Telemetri Simülatörü</h2>
-      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
-        Üniversite kampüsleri ve spor salonu çıkışlarındaki ferahlama kabinlerinden dağıtılan her 90 ml numunenin lokasyon bazlı UTM/QR izleme kaydını test edin:
+    <!-- FAZ 2: Emergency Cool-Down Pod IoT Telemetry & QR Generator -->
+    <div class="card" id="pod-sim" style="margin-bottom: 2.25rem;">
+      <h2>
+        <span>🧊 Faz 2: "Emergency Cool-Down Pod" 4D IoT & Akıllı QR Numune Simülatörü</span>
+        <span class="phase-tag">Kampüs & Gym Deneyimi</span>
+      </h2>
+      <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.9rem;">
+        Üniversite kampüsleri ve spor salonu çıkışlarındaki ferahlama kabinlerinden dağıtılan her 90 ml numunenin lokasyon bazlı UTM/QR izleme kaydını ve üretilen tek kullanımlık indirim kodunu test edin:
       </p>
       <div class="scenario-pills">
-        <div class="pill active" onclick="dispensePodSample('ODTU_MERKEZ_01', 'ODTÜ Çarşı / Kütüphane Çıkışı', this)">🎓 ODTÜ Kampüs Pod #01</div>
-        <div class="pill" onclick="dispensePodSample('MILLET_KUTUPHANE_02', 'Cumhurbaşkanlığı Millet Kütüphanesi', this)">📚 Millet Kütüphanesi Pod #02</div>
-        <div class="pill" onclick="dispensePodSample('ITU_AYAZAGA_03', 'İTÜ Ayazağa Hackathon Alanı', this)">💻 İTÜ Ayazağa Pod #03</div>
-        <div class="pill" onclick="dispensePodSample('MACFIT_GYM_04', 'MACFit Antrenman Çıkışı', this)">🏋️ Gym Çıkışı Pod #04</div>
+        <div class="pill active" onclick="dispensePodSample('ODTU_MERKEZ_01', 'ODTÜ Çarşı / Kütüphane Çıkışı', '%31.4', this)">🎓 ODTÜ Kampüs Pod #01</div>
+        <div class="pill" onclick="dispensePodSample('MILLET_KUTUPHANE_02', 'Cumhurbaşkanlığı Millet Kütüphanesi', '%34.2', this)">📚 Millet Kütüphanesi Pod #02</div>
+        <div class="pill" onclick="dispensePodSample('ITU_AYAZAGA_03', 'İTÜ Ayazağa Hackathon Alanı', '%29.8', this)">💻 İTÜ Ayazağa Pod #03</div>
+        <div class="pill" onclick="dispensePodSample('MACFIT_GYM_04', 'MACFit Antrenman Çıkışı', '%27.5', this)">🏋️ Gym Çıkışı Pod #04</div>
       </div>
-      <div id="podTerminal" class="pod-terminal">
-        [POD_STATUS]: ACTIVE | 4D Menthol Nebulizer & Cold Air Jet: READY<br />
-        [LOCATION]: ODTÜ Çarşı / Kütüphane Çıkışı (POD_ID: ODTU_MERKEZ_01)<br />
-        [SAMPLE_DISPENSED]: H&S Buzlu Mentol 90ml Travel Size (#HS-M5-84920)<br />
-        [DYNAMIC_QR_URL]: https://hs-minus5.com/try?utm_source=coolpod&utm_medium=qr&utm_content=ODTU_MERKEZ_01<br />
-        [CLAIM_COMPLIANCE]: "-5°C Ferahlık Hissi" (Sensory cooling sensation verified ✅)
+
+      <div class="pod-grid">
+        <div id="podTerminal" class="pod-terminal">
+          [POD_STATUS]: ACTIVE | 4D Menthol Nebulizer & Cold Air Vortex: READY ❄️<br />
+          [LOCATION]: ODTÜ Çarşı / Kütüphane Çıkışı (POD_ID: ODTU_MERKEZ_01)<br />
+          [SENSORY_CYCLE]: 10s Cold Air Jet + Menthol Aroma + 120FPS Slow-Mo Video Recorded<br />
+          [SAMPLE_DISPENSED]: H&S Buzlu Mentol 90ml Travel Size (#HS-M5-84920)<br />
+          [DYNAMIC_QR_URL]: https://hs-minus5.com/try?utm_source=coolpod&utm_content=ODTU_MERKEZ_01<br />
+          [LOCATION_SCAN_RATE]: %31.4 QR Scan-to-Coupon Conversion | Anti-Abuse: 1 Device = 1 Sample ✅<br />
+          [CLAIM_COMPLIANCE]: "-5°C Ferahlık Hissi" (Sensory cooling sensation verified ✅)
+        </div>
+        <div class="qr-card">
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--ice-blue);">90ml Numune Dinamik QR</div>
+          <canvas id="qrCanvas" width="128" height="128"></canvas>
+          <div id="qrTokenLabel" style="font-family: monospace; font-size: 0.75rem; color: var(--text-muted);">#HS-M5-84920</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAZ 3: Retail Cooler Stand & Quick-Commerce Simulator -->
+    <div class="grid-2" id="retail-sim">
+      <div class="card">
+        <h2>
+          <span>🛒 Faz 3A: Mağaza İçi "Soğutucu Dolap" POSM Simülatörü</span>
+          <span class="phase-tag">Gratis / Watsons / Migros</span>
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.9rem;">
+          Kişisel bakım reyonunda standart raf körlüğünü kıran, buğulu cam detaylı ve buz mavisi LED aydınlatmalı <strong>Soğutucu Dolap (Cooler Stand)</strong> kapağını açarak mağaza içi deneyimi test edin:
+        </p>
+        <div class="cooler-stand">
+          <div style="font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; color: var(--ice-blue);">
+            🧊 H&S EMERGENCY COOLER STAND • END-CAP POSM
+          </div>
+          <div id="coolerDoor" class="cooler-door">
+            <div id="coolerIcon" style="font-size: 2.8rem; margin-bottom: 0.3rem;">🚪❄️</div>
+            <div id="coolerTitle" style="font-weight: 800; font-size: 1.05rem;">BUĞULU CAM KAPAK KAPALI</div>
+            <p id="coolerDesc" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">
+              Üzerinde 3D su damlacığı/kırağı dokusu ve 6500K Buz Mavisi LED aydınlatma ile 15 metreden dikkat çeker.
+            </p>
+          </div>
+          <button class="btn-cool to-cool" onclick="toggleCoolerDoor()" id="coolerBtn" style="margin-top: 0.4rem;">
+            🔊 Soğutucu Dolap Kapağını Aç (SFX + Deneyim)
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>
+          <span>⚡ Faz 3B: Hızlı Ticaret Sepet Algoritması</span>
+          <span class="phase-tag">Getir / Trendyol Go</span>
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+          Gece ders/kodlama mesaisinde veya antrenman sonrasında sepete eklenen ürünlere göre tetiklenen <strong>Algoritmik Çapraz Satış (Cross-Sell)</strong> motorunu test edin:
+        </p>
+        <div onclick="selectBasket('coffee', this)" class="qcomm-item selected">
+          <span>☕ <strong>Gece 02:30 Sepeti:</strong> Soğuk Kahve (Cold Brew) + Enerji İçeceği</span>
+          <span class="phase-tag">Kütüphane / CTF</span>
+        </div>
+        <div onclick="selectBasket('protein', this)" class="qcomm-item">
+          <span>🥤 <strong>Akşam 19:45 Sepeti:</strong> Protein Sütü + İzotonik Sporcu İçeceği</span>
+          <span class="phase-tag">Gym Çıkışı</span>
+        </div>
+        <div onclick="selectBasket('snack', this)" class="qcomm-item">
+          <span>🍕 <strong>Gece 01:15 Sepeti:</strong> Dondurulmuş Pizza + Soğuk Kola</span>
+          <span class="phase-tag">Gaming / Yurt</span>
+        </div>
+
+        <div id="crossSellBox" class="cross-sell-banner">
+          <div style="font-weight: 800; color: var(--ice-blue); margin-bottom: 0.25rem;">
+            🔥 Kafa Yandı mı? Harareti Kes, -5°C Hissine Geç!
+          </div>
+          <p style="font-size: 0.82rem; color: #e2e8f0;">
+            Gece mesaisinde kahve zihnini, <strong>Head & Shoulders Buzlu Mentol Ferahlığı</strong> saç derini sıfırlar! Sepetine özel <strong>%25 İndirimle</strong> hemen ekle.
+          </p>
+        </div>
       </div>
     </div>
 
     <!-- P&G WHO / WHAT / HOW / SUCCESS Architecture -->
-    <h2 style="margin-bottom: 0.5rem; color: var(--ice-blue);">🧭 P&G WHO / WHAT / HOW / SUCCESS Çerçeve Özeti</h2>
+    <h2 style="margin-bottom: 0.5rem; color: var(--ice-blue);">🧭 P&G WHO / WHAT / HOW / SUCCESS 100 Puanlık Çerçeve Özeti</h2>
     <div class="framework-grid">
       <div class="fw-step">
         <span class="fw-score">1. WHO • 30 Puan</span>
         <h3>Tüketici & İçgörü</h3>
-        <p>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
           18–24 yaş Z kuşağı öğrenciler ve aktif gençler. Kütüphane sabahlamaları, CTF/Hackathon maratonları ve ağır antrenmanlar sonrası yaşanan <strong>"hararet"</strong> anında anında bir <em>sistem sıfırlamasına (reset)</em> ihtiyaç duyarlar.
         </p>
       </div>
       <div class="fw-step">
         <span class="fw-score">2. WHAT • 45 Puan</span>
         <h3>Büyük Yaratıcı Fikir</h3>
-        <p>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
           Şampuanı sıradan bir temizlik ürününden çıkarıp gençlerin bunaldıkları anda bastıkları bir <strong>"Acil Soğutma Butonu"</strong> olarak konumlandırıyoruz: <strong>"Harareti Kes, -5°C Hissine Geç!"</strong>
         </p>
       </div>
       <div class="fw-step">
         <span class="fw-score">3. HOW • 20 Puan</span>
         <h3>360° Konuşulabilir Plan</h3>
-        <p>
-          <strong>Faz 1:</strong> Termal Kamera AR Filtresi (#HararetiKes).<br />
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          <strong>Faz 1:</strong> Termal Kamera AR Filtresi (<code>#HararetiKes</code>).<br />
           <strong>Faz 2:</strong> Kampüs & Gym <em>Emergency Cool-Down Pods</em> + QR Numune.<br />
           <strong>Faz 3:</strong> Marketlerde <em>Soğutucu Dolap</em> görünümlü POSM stantlar.
         </p>
@@ -467,14 +791,49 @@
       <div class="fw-step">
         <span class="fw-score">4. SUCCESS • 5 Puan</span>
         <h3>Mühendislik KPI'ları</h3>
-        <p>
-          AR filtre UGC paylaşım adedi, #HararetiKes etkileşim oranı, dağıtılan QR kodlu numunelerin taranma ve satın almaya dönüşüm (conversion) oranı, soğutucu stant satış artışı.
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          AR filtre UGC paylaşım adedi (75K+), <code>#HararetiKes</code> etkileşim oranı (>%6.5), dağıtılan 50K QR kodlu numunenin taranma (%28+) ve satın almaya dönüşüm oranı, soğutucu stant satış artışı (+%22).
         </p>
       </div>
     </div>
 
+    <!-- Interactive Jury Q&A Defense Matrix -->
+    <div id="qa-matrix" style="margin-top: 2rem;">
+      <h2 style="margin-bottom: 0.85rem; color: var(--ice-blue);">🛡️ Jüri Soru-Cevap (Q&A) Savunma Rehberi ve P&G Uyumluluk Denetimi</h2>
+
+      <div class="qa-item open">
+        <button class="qa-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>❓ Soru 1: "-5°C ifadesi gerçek bir sıcaklık düşüşü iddiası (invented product claim) riski taşır mı?"</span>
+          <span>▼</span>
+        </button>
+        <div class="qa-answer">
+          <strong>Cevap:</strong> Kesinlikle hayır; P&G'nin <em>DO's & DON'Ts</em> kurallarına %100 sadık kaldık. İletişimin hiçbir noktasında "kafa derisi sıcaklığını 5 derece düşürür" gibi fiziksel veya tıbbi bir iddia kullanmıyoruz. Sloganımızdan AR filtresine kadar her yerde <strong>"-5°C Hissine Geç"</strong> ve <strong>"-5°C Ferahlık Hissi"</strong> diyerek bunun mentol formülünün TRPM8 soğuk reseptörlerini uyarmasıyla oluşan duyusal bir ferahlık algısı olduğunu vurguluyoruz.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <button class="qa-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>❓ Soru 2: "Neden Buzlu Mentol'ü sadece yaz sıcağına değil de sınav, CTF ve spor anlarına konumlandırdınız?"</span>
+          <span>▼</span>
+        </button>
+        <div class="qa-answer">
+          <strong>Cevap:</strong> Çünkü "yaz sıcağı" yılda sadece 3 ay sürer; oysa 18–24 yaş Z kuşağının hayatındaki <strong>"Hararet" (zihinsel ve fiziksel aşırı yüklenme)</strong> 12 ay boyunca devam eder. Kütüphanede vize/final sabahlaması, 24 saatlik kodlama yarışmaları ve kapalı spor salonu antrenmanları kışın ortasında da hararet yaptırır. Bu içgörü ürünü mevsimsellikten kurtarıp 365 gün tüketilen bir "sistem sıfırlayıcı" yapar.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <button class="qa-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>❓ Soru 3: "Kampüsteki kabinlerden dağıtılan numunelerin gerçek satışa dönüştüğünü nasıl kanıtlayacaksınız?"</span>
+          <span>▼</span>
+        </button>
+        <div class="qa-answer">
+          <strong>Cevap:</strong> Kabinlerimizdeki akıllı otomat, 10 saniyelik 4 boyutlu deneyim sonrasında üzerinde <strong>lokasyona özel dinamik QR kod</strong> bulunan 90 ml numune verir. Öğrenci ürünü evde deneyip şişedeki QR kodu okuttuğunda ilk tam boy H&S Buzlu Mentol alışverişinde geçerli tek kullanımlık indirim barkodu alır. Böylece <em>ODTÜ kabini mi yoksa MACFit kabini mi</em> daha yüksek satın alma dönüşümü getirdi, tekil olarak ölçülür.
+        </div>
+      </div>
+    </div>
+
     <footer>
-      Project-Minus5 • Head & Shoulders Buzlu Mentol Ferahlığı Case Study Repository • Bahattin Yunus ÇETİN
+      Project-Minus5 • Head & Shoulders Buzlu Mentol Ferahlığı 360° Talkability Hub • Bahattin Yunus ÇETİN
     </footer>
   </div>
 
@@ -491,11 +850,35 @@
       campus: {
         heatDesc: "Yaz sıcağı, dolu otobüs ve kampüs koşturmacası... Saçlar ağırlaştı, hararet tavan yaptı.",
         coolDesc: "Emergency Cool-Down tamamlandı! -5°C ferahlık hissiyle günün geri kalanına buz gibi başlangıç!"
+      },
+      esports: {
+        heatDesc: "5. uzatma raundu, kulaklık altında kafa derisi alev aldı, odak dağılmak üzere!",
+        coolDesc: "Clutch öncesi -5°C ferahlık hissiyle soğukkanlılık geri geldi! Kepek sıfır, odak %100!"
       }
     };
 
     let currentScenario = 'ctf';
     let isCooled = false;
+
+    // Synthesized Web Audio SFX (Zero external audio dependencies)
+    function playSubZeroSound(cooling) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = cooling ? 'sine' : 'sawtooth';
+        osc.frequency.setValueAtTime(cooling ? 880 : 220, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(cooling ? 1760 : 140, ctx.currentTime + 0.28);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+      } catch (e) {}
+    }
 
     function selectScenario(key, el) {
       currentScenario = key;
@@ -507,6 +890,7 @@
 
     function toggleCoolMode() {
       isCooled = !isCooled;
+      playSubZeroSound(isCooled);
       renderARState();
     }
 
@@ -522,7 +906,7 @@
       if (!isCooled) {
         vp.className = 'ar-viewport overheat';
         hudMode.textContent = 'MOD: TERMAL KAMERA 🔥';
-        hudMetric.textContent = 'DURUM: HARARET TAVAN';
+        hudMetric.textContent = 'DURUM: HARARET %99';
         avatar.textContent = '🥵🔥';
         status.textContent = 'SİSTEM HARARET YAPTI!';
         desc.textContent = scenarios[currentScenario].heatDesc;
@@ -538,6 +922,47 @@
         btn.className = 'btn-cool to-heat';
         btn.textContent = '🔥 Tekrar Termal Hararet Moduna Dön';
       }
+    }
+
+    // Animated Thermal vs Ice Particles on Canvas
+    const arCanvas = document.getElementById('arCanvas');
+    const arCtx = arCanvas.getContext('2d');
+    const particles = Array.from({ length: 32 }, () => ({
+      x: Math.random() * 500,
+      y: Math.random() * 320,
+      r: 2 + Math.random() * 4,
+      vy: 0.6 + Math.random() * 1.2
+    }));
+
+    function animateParticles() {
+      arCtx.clearRect(0, 0, arCanvas.width, arCanvas.height);
+      particles.forEach(p => {
+        arCtx.beginPath();
+        arCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        if (!isCooled) {
+          arCtx.fillStyle = 'rgba(255, 110, 48, 0.55)';
+          p.y -= p.vy;
+          if (p.y < 0) p.y = arCanvas.height;
+        } else {
+          arCtx.fillStyle = 'rgba(0, 229, 255, 0.65)';
+          p.y += p.vy;
+          if (p.y > arCanvas.height) p.y = 0;
+        }
+        arCtx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // KPI Presets & Calculator
+    function applyPreset(reach, samples, qr, el) {
+      const pills = el.parentElement.querySelectorAll('.pill');
+      pills.forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('reachSlider').value = reach;
+      document.getElementById('sampleSlider').value = samples;
+      document.getElementById('qrSlider').value = qr;
+      updateKPIs();
     }
 
     function updateKPIs() {
@@ -560,18 +985,113 @@
       document.getElementById('outRetailLift').textContent = '+%' + retailLift;
     }
 
-    function dispensePodSample(podId, locName, el) {
+    // Visual Deterministic Matrix QR Renderer for Pod Simulator
+    function drawSimulatedQR(seedStr) {
+      const canvas = document.getElementById('qrCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const size = 16;
+      const cell = canvas.width / size;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#061224';
+
+      let hash = 2166136261;
+      for (let i = 0; i < seedStr.length; i++) {
+        hash ^= seedStr.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const isCorner = (r < 4 && c < 4) || (r < 4 && c >= size - 4) || (r >= size - 4 && c < 4);
+          if (isCorner) {
+            if (r === 0 || r === 3 || c === 0 || c === 3 || c === size - 1 || c === size - 4 || r === size - 1 || r === size - 4 || (r >= 1 && r <= 2 && c >= 1 && c <= 2)) {
+              ctx.fillRect(c * cell, r * cell, cell - 1, cell - 1);
+            }
+          } else {
+            hash ^= (r * 31 + c * 17);
+            hash = Math.imul(hash, 16777619);
+            if ((Math.abs(hash) % 10) < 5) {
+              ctx.fillRect(c * cell, r * cell, cell - 1, cell - 1);
+            }
+          }
+        }
+      }
+    }
+
+    function dispensePodSample(podId, locName, convRate, el) {
       const pills = el.parentElement.querySelectorAll('.pill');
       pills.forEach(p => p.classList.remove('active'));
       el.classList.add('active');
       const token = Math.floor(10000 + Math.random() * 90000);
+      playSubZeroSound(true);
       document.getElementById('podTerminal').innerHTML =
         `[POD_STATUS]: ACTIVE | 10s Cold Air Vortex + Menthol Mist TRIGGERED ❄️<br />` +
         `[LOCATION]: ${locName} (POD_ID: ${podId})<br />` +
+        `[SENSORY_CYCLE]: 10s Cold Air Jet + Menthol Aroma + 120FPS Slow-Mo Video Recorded<br />` +
         `[SAMPLE_DISPENSED]: H&S Buzlu Mentol 90ml Travel Size (#HS-M5-${token})<br />` +
-        `[DYNAMIC_QR_URL]: https://hs-minus5.com/try?utm_source=coolpod&utm_medium=qr&utm_content=${podId}&token=${token}<br />` +
+        `[DYNAMIC_QR_URL]: https://hs-minus5.com/try?utm_source=coolpod&utm_content=${podId}&token=${token}<br />` +
+        `[LOCATION_SCAN_RATE]: ${convRate} QR Scan-to-Coupon Conversion | Anti-Abuse: 1 Device = 1 Sample ✅<br />` +
         `[CLAIM_COMPLIANCE]: "-5°C Ferahlık Hissi" (Sensory cooling sensation verified ✅)`;
+      document.getElementById('qrTokenLabel').textContent = `#HS-M5-${token}`;
+      drawSimulatedQR(podId + token);
     }
+
+    // Retail Cooler Stand Simulator
+    let coolerOpen = false;
+    function toggleCoolerDoor() {
+      coolerOpen = !coolerOpen;
+      playSubZeroSound(coolerOpen);
+      const door = document.getElementById('coolerDoor');
+      const icon = document.getElementById('coolerIcon');
+      const title = document.getElementById('coolerTitle');
+      const desc = document.getElementById('coolerDesc');
+      const btn = document.getElementById('coolerBtn');
+
+      if (coolerOpen) {
+        door.classList.add('opened');
+        icon.textContent = '🧴🧊✨';
+        title.textContent = 'SOĞUTUCU KAPAK AÇILDI: -5°C FERAHLIK HİSSİ!';
+        desc.textContent = '2 sn soğuk rüzgar & buz kristallenme SFX çaldı! 350ml & 600ml H&S Buzlu Mentol şişeleri buz mavisi LED altında parlıyor.';
+        btn.textContent = '🚪 Soğutucu Kapağı Kapat';
+      } else {
+        door.classList.remove('opened');
+        icon.textContent = '🚪❄️';
+        title.textContent = 'BUĞULU CAM KAPAK KAPALI';
+        desc.textContent = 'Üzerinde 3D su damlacığı/kırağı dokusu ve 6500K Buz Mavisi LED aydınlatma ile 15 metreden dikkat çeker.';
+        btn.textContent = '🔊 Soğutucu Dolap Kapağını Aç (SFX + Deneyim)';
+      }
+    }
+
+    // Quick-Commerce Cross-Sell Simulator
+    const basketOffers = {
+      coffee: {
+        title: '🔥 Kafa Yandı mı? Harareti Kes, -5°C Hissine Geç!',
+        body: 'Gece mesaisinde kahve zihnini, Head & Shoulders Buzlu Mentol Ferahlığı saç derini sıfırlar! Sepetine özel %25 İndirimle hemen ekle.'
+      },
+      protein: {
+        title: '🏋️ Set Bitti Ama Yangın Bitmedi mi? Harareti Kes!',
+        body: 'Antrenman sonrası ter ve saç derisi bunalmasını -5°C ferahlık hissiyle sıfırla! H&S Buzlu Mentol sporcu sepetine özel %25 İndirimli.'
+      },
+      snack: {
+        title: '🎮 Oyun Uzadı, Sistem Isındı mı? -5°C Hissine Geç!',
+        body: 'Gece boyu süren maratonun hararetini H&S Buzlu Mentol Ferahlığı ile kes, kepeksiz ve ferah başla!'
+      }
+    };
+
+    function selectBasket(key, el) {
+      const items = el.parentElement.querySelectorAll('.qcomm-item');
+      items.forEach(i => i.classList.remove('selected'));
+      el.classList.add('selected');
+      const box = document.getElementById('crossSellBox');
+      box.innerHTML =
+        `<div style="font-weight: 800; color: var(--ice-blue); margin-bottom: 0.25rem;">${basketOffers[key].title}</div>` +
+        `<p style="font-size: 0.82rem; color: #e2e8f0;">${basketOffers[key].body}</p>`;
+    }
+
+    // Initial QR draw
+    drawSimulatedQR('ODTU_MERKEZ_01_84920');
   </script>
 </body>
 </html>
