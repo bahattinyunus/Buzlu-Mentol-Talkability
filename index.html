@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project-Minus5 | H&S Buzlu Mentol Ferahlığı — 360° Talkability Hub</title>
+  <style>
+    :root {
+      --bg-dark: #060b16;
+      --bg-card: #0d1629;
+      --bg-card-hover: #13203b;
+      --ice-blue: #00e5ff;
+      --ice-deep: #0077ff;
+      --heat-red: #ff3b30;
+      --heat-orange: #ff9500;
+      --text-main: #f0f6fc;
+      --text-muted: #8b9bb4;
+      --border-color: rgba(0, 229, 255, 0.2);
+      --accent-glow: 0 0 25px rgba(0, 229, 255, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top right, #0a1931 0%, var(--bg-dark) 65%);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Header / Hero */
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      background: rgba(0, 229, 255, 0.12);
+      border: 1px solid var(--ice-blue);
+      color: var(--ice-blue);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(90deg, #ffffff, var(--ice-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slogan-box {
+      display: inline-block;
+      margin: 1rem auto;
+      padding: 0.85rem 2rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 59, 48, 0.18), rgba(0, 229, 255, 0.22));
+      border: 1px solid rgba(0, 229, 255, 0.45);
+      box-shadow: var(--accent-glow);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .disclaimer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+    }
+
+    /* Grid Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: var(--ice-blue);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--ice-blue);
+    }
+
+    /* AR Thermal Simulator */
+    .ar-viewport {
+      position: relative;
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.5s ease;
+      overflow: hidden;
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ar-viewport.overheat {
+      background: radial-gradient(circle at center, #7a1111 0%, #330505 70%, #1a0202 100%);
+      border: 2px solid var(--heat-red);
+      box-shadow: 0 0 30px rgba(255, 59, 48, 0.4);
+    }
+
+    .ar-viewport.cooled {
+      background: radial-gradient(circle at center, #004e7a 0%, #031c38 70%, #020c1b 100%);
+      border: 2px solid var(--ice-blue);
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.5);
+    }
+
+    .hud-top {
+      display: flex;
+      justify-content: space-between;
+      font-family: monospace;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.75rem;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 8px;
+    }
+
+    .avatar-state {
+      font-size: 4.2rem;
+      margin: 1rem 0 0.5rem;
+      transition: transform 0.35s ease;
+    }
+
+    .ar-status-text {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-cool {
+      cursor: pointer;
+      border: none;
+      padding: 0.9rem 1.6rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .btn-cool.to-cool {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+    }
+
+    .btn-cool.to-heat {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: #fff;
+    }
+
+    /* Scenario Selector */
+    .scenario-pills {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      flex: 1;
+      text-align: center;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill.active {
+      background: rgba(0, 229, 255, 0.2);
+      border-color: var(--ice-blue);
+      color: var(--ice-blue);
+      font-weight: 700;
+    }
+
+    /* KPI Sliders */
+    .slider-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--ice-blue);
+      cursor: pointer;
+    }
+
+    .kpi-results {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .kpi-box {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 10px;
+      padding: 0.85rem;
+      text-align: center;
+    }
+
+    .kpi-val {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--ice-blue);
+    }
+
+    .kpi-label {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* Framework Cards */
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .fw-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.35rem;
+    }
+
+    .fw-score {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(0, 229, 255, 0.15);
+      color: var(--ice-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .fw-step h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .fw-step p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">🧊 P&G Brand Building Framework • Project-Minus5</span>
+      <h1>Head & Shoulders Buzlu Mentol Ferahlığı</h1>
+      <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+        18–24 yaş Z kuşağının zihinsel ve fiziksel "hararet" anlarını sahiplenen, organik konuşulabilirlik (talkability) ve ürün denemesi (trial) odaklı 360° kampanya mimarisi.
+      </p>
+      <div class="slogan-box">"Harareti Kes, -5°C Hissine Geç!"</div>
+      <p class="disclaimer">*Not: -5°C gerçek bir sıcaklık düşüşü değil, ürünün mentol formülüyle yarattığı benzersiz ferahlık hissidir.</p>
+    </header>
+
+    <div class="grid-2">
+      <!-- Interactive AR Filter Simulator -->
+      <div class="card">
+        <h2>📱 Faz 1: "Termal Kamera" AR Filtresi Simülatörü</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Kullanıcının hararet anını seçin ve <strong>-5°C Ferahlık Hissi</strong> dönüşümünü test edin:
+        </p>
+
+        <div class="scenario-pills">
+          <div class="pill active" onclick="selectScenario('ctf', this)">💻 Gece 03:00 CTF / Final</div>
+          <div class="pill" onclick="selectScenario('gym', this)">🏋️ Ağır Squat / Gym Sonrası</div>
+          <div class="pill" onclick="selectScenario('campus', this)">☀️ Kampüs & Toplu Taşıma</div>
+        </div>
+
+        <div id="arViewport" class="ar-viewport overheat">
+          <div class="hud-top">
+            <span id="hudMode">MOD: TERMAL KAMERA 🔥</span>
+            <span id="hudMetric">HİS: HARARET TAVAN</span>
+          </div>
+          <div>
+            <div id="avatarIcon" class="avatar-state">🥵🔥</div>
+            <div id="arStatus" class="ar-status-text">SİSTEM HARARET YAPTI!</div>
+            <p id="arDesc" style="font-size: 0.86rem; opacity: 0.9;">
+              Millet Kütüphanesi'nde 12. saat... Zihin alev aldı, saç derisi bunaldı. Acil sistem sıfırlaması (reset) gerekiyor!
+            </p>
+          </div>
+          <button id="toggleBtn" class="btn-cool to-cool" onclick="toggleCoolMode()">
+            🧊 Harareti Kes (-5°C Hissine Geç!)
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive KPI & Talkability ROI Calculator -->
+      <div class="card">
+        <h2>📊 Faz 4: Canlı KPI & Dönüşüm Simülatörü</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+          360° temas noktalarının konuşulabilirlik (UGC), QR kodlu numune dönüşümü ve satış etkisini simüle edin:
+        </p>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>📱 AR Filtre & Dijital Erişim (Görüntülenme)</span>
+            <strong id="reachVal">5.000.000</strong>
+          </div>
+          <input type="range" id="reachSlider" min="1000000" max="15000000" step="500000" value="5000000" oninput="updateKPIs()" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>🧊 Cool-Down Pod Fiziksel Numune (Adet)</span>
+            <strong id="sampleVal">50.000</strong>
+          </div>
+          <input type="range" id="sampleSlider" min="10000" max="150000" step="5000" value="50000" oninput="updateKPIs()" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>🔗 QR Kod Tarama Oranı (Scan Rate %)</span>
+            <strong id="qrVal">%28</strong>
+          </div>
+          <input type="range" id="qrSlider" min="10" max="60" step="2" value="28" oninput="updateKPIs()" />
+        </div>
+
+        <div class="kpi-results">
+          <div class="kpi-box">
+            <div class="kpi-val" id="outUGC">75.000</div>
+            <div class="kpi-label">#HararetiKes Organik UGC Paylaşımı</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-val" id="outScans">14.000</div>
+            <div class="kpi-label">QR Kod Okutan Tekil Genç</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-val" id="outTrialSales">6.050</div>
+            <div class="kpi-label">Doğrudan İlk Satın Alma (New User)</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-val" id="outRetailLift">+%22.4</div>
+            <div class="kpi-label">Soğutucu POSM Perakende Satış Artışı</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P&G WHO / WHAT / HOW / SUCCESS Architecture -->
+    <h2 style="margin-bottom: 0.5rem; color: var(--ice-blue);">🧭 P&G WHO / WHAT / HOW / SUCCESS Çerçeve Özeti</h2>
+    <div class="framework-grid">
+      <div class="fw-step">
+        <span class="fw-score">1. WHO • 30 Puan</span>
+        <h3>Tüketici & İçgörü</h3>
+        <p>
+          18–24 yaş Z kuşağı öğrenciler ve aktif gençler. Kütüphane sabahlamaları, CTF/Hackathon maratonları ve ağır antrenmanlar sonrası yaşanan <strong>"hararet"</strong> anında anında bir <em>sistem sıfırlamasına (reset)</em> ihtiyaç duyarlar.
+        </p>
+      </div>
+      <div class="fw-step">
+        <span class="fw-score">2. WHAT • 45 Puan</span>
+        <h3>Büyük Yaratıcı Fikir</h3>
+        <p>
+          Şampuanı sıradan bir temizlik ürününden çıkarıp gençlerin bunaldıkları anda bastıkları bir <strong>"Acil Soğutma Butonu"</strong> olarak konumlandırıyoruz: <strong>"Harareti Kes, -5°C Hissine Geç!"</strong>
+        </p>
+      </div>
+      <div class="fw-step">
+        <span class="fw-score">3. HOW • 20 Puan</span>
+        <h3>360° Konuşulabilir Plan</h3>
+        <p>
+          <strong>Faz 1:</strong> Termal Kamera AR Filtresi (#HararetiKes).<br />
+          <strong>Faz 2:</strong> Kampüs & Gym <em>Emergency Cool-Down Pods</em> + QR Numune.<br />
+          <strong>Faz 3:</strong> Marketlerde <em>Soğutucu Dolap</em> görünümlü POSM stantlar.
+        </p>
+      </div>
+      <div class="fw-step">
+        <span class="fw-score">4. SUCCESS • 5 Puan</span>
+        <h3>Mühendislik KPI'ları</h3>
+        <p>
+          AR filtre UGC paylaşım adedi, #HararetiKes etkileşim oranı, dağıtılan QR kodlu numunelerin taranma ve satın almaya dönüşüm (conversion) oranı, soğutucu stant satış artışı.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      Project-Minus5 • Head & Shoulders Buzlu Mentol Ferahlığı Case Study Repository
+    </footer>
+  </div>
+
+  <script>
+    const scenarios = {
+      ctf: {
+        heatDesc: "Millet Kütüphanesi'nde 12. saat veya CTF yarışması... Zihin alev aldı, saç derisi bunaldı. Acil sistem sıfırlaması (reset) gerekiyor!",
+        coolDesc: "Buzlu Mentol devrede! -5°C ferahlık hissiyle zihin sıfırlandı, kepek endişesi bitti, yeni commit atmaya hazırsın!"
+      },
+      gym: {
+        heatDesc: "Son squat seti bitti ama hararet bitmedi! Ter, saç derisinde kaşıntı ve yanma hissi tavan yaptı.",
+        coolDesc: "Antrenman yangını söndü! -5°C ferahlık hissiyle saç derisi ferahladı, %100'e kadar kepeksiz özgüven aktif!"
+      },
+      campus: {
+        heatDesc: "Yaz sıcağı, dolu otobüs ve kampüs koşturmacası... Saçlar ağırlaştı, hararet tavan yaptı.",
+        coolDesc: "Emergency Cool-Down tamamlandı! -5°C ferahlık hissiyle günün geri kalanına buz gibi başlangıç!"
+      }
+    };
+
+    let currentScenario = 'ctf';
+    let isCooled = false;
+
+    function selectScenario(key, el) {
+      currentScenario = key;
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      renderARState();
+    }
+
+    function toggleCoolMode() {
+      isCooled = !isCooled;
+      renderARState();
+    }
+
+    function renderARState() {
+      const vp = document.getElementById('arViewport');
+      const hudMode = document.getElementById('hudMode');
+      const hudMetric = document.getElementById('hudMetric');
+      const avatar = document.getElementById('avatarIcon');
+      const status = document.getElementById('arStatus');
+      const desc = document.getElementById('arDesc');
+      const btn = document.getElementById('toggleBtn');
+
+      if (!isCooled) {
+        vp.className = 'ar-viewport overheat';
+        hudMode.textContent = 'MOD: TERMAL KAMERA 🔥';
+        hudMetric.textContent = 'DURUM: HARARET TAVAN';
+        avatar.textContent = '🥵🔥';
+        status.textContent = 'SİSTEM HARARET YAPTI!';
+        desc.textContent = scenarios[currentScenario].heatDesc;
+        btn.className = 'btn-cool to-cool';
+        btn.textContent = '🧊 Harareti Kes (-5°C Hissine Geç!)';
+      } else {
+        vp.className = 'ar-viewport cooled';
+        hudMode.textContent = 'MOD: -5°C FERAHLIK HİSSİ ❄️';
+        hudMetric.textContent = 'KEPEK KORUMASI: AKTİF';
+        avatar.textContent = '😎🧊';
+        status.textContent = '-5°C FERAHLIK HİSSİ AKTİF!';
+        desc.textContent = scenarios[currentScenario].coolDesc;
+        btn.className = 'btn-cool to-heat';
+        btn.textContent = '🔥 Tekrar Termal Hararet Moduna Dön';
+      }
+    }
+
+    function updateKPIs() {
+      const reach = parseInt(document.getElementById('reachSlider').value, 10);
+      const samples = parseInt(document.getElementById('sampleSlider').value, 10);
+      const qrRate = parseInt(document.getElementById('qrSlider').value, 10);
+
+      document.getElementById('reachVal').textContent = reach.toLocaleString('tr-TR');
+      document.getElementById('sampleVal').textContent = samples.toLocaleString('tr-TR');
+      document.getElementById('qrVal').textContent = '%' + qrRate;
+
+      const ugc = Math.round(reach * 0.015);
+      const scans = Math.round(samples * (qrRate / 100));
+      const directSales = Math.round(scans * 0.35 + ugc * 0.015);
+      const retailLift = (12 + (reach / 1000000) * 1.1 + (samples / 10000) * 0.98).toFixed(1);
+
+      document.getElementById('outUGC').textContent = ugc.toLocaleString('tr-TR');
+      document.getElementById('outScans').textContent = scans.toLocaleString('tr-TR');
+      document.getElementById('outTrialSales').textContent = directSales.toLocaleString('tr-TR');
+      document.getElementById('outRetailLift').textContent = '+%' + retailLift;
+    }
+  </script>
+</body>
+</html>
