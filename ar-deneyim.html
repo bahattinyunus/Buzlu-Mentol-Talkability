@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project-Minus5 | Canlı Termal AR Filtre Stüdyosu (#HararetiKes)</title>
+  <style>
+    :root {
+      --bg-dark: #050a14;
+      --bg-card: #0c1528;
+      --ice-blue: #00e5ff;
+      --ice-deep: #0077ff;
+      --heat-red: #ff3b30;
+      --heat-orange: #ff9500;
+      --emerald: #10b981;
+      --text-main: #f0f6fc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(0, 229, 255, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top right, #0a1b38 0%, var(--bg-dark) 65%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 10, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .navbar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--ice-blue);
+      background: rgba(0, 229, 255, 0.12);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .phone-frame {
+      background: #030712;
+      border: 4px solid rgba(0, 229, 255, 0.4);
+      border-radius: 32px;
+      padding: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(0, 229, 255, 0.2);
+      max-width: 380px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    #storyCanvas {
+      width: 100%;
+      height: auto;
+      border-radius: 22px;
+      display: block;
+      background: #1a0505;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      color: var(--ice-blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
+    }
+
+    .btn-heat {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ice-blue);
+      color: var(--ice-blue);
+    }
+
+    .pill-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0.75rem 0 1.1rem;
+    }
+
+    .pill {
+      padding: 0.5rem 0.85rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .pill.active {
+      background: rgba(0, 229, 255, 0.2);
+      border-color: var(--ice-blue);
+      color: var(--ice-blue);
+      font-weight: 700;
+    }
+
+    .privacy-banner {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid var(--emerald);
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #d1fae5;
+      margin-top: 1rem;
+    }
+
+    video#webcamVideo {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="brand-logo">🧊 Project-Minus5 • Termal AR Stüdyosu</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">🖥️ Komuta Merkezi</a>
+        <a href="ar-deneyim.html" class="nav-link active">📱 Canlı Termal AR Stüdyosu</a>
+        <a href="kampus-harita.html" class="nav-link">🗺️ Kampüs Pod Haritası</a>
+        <a href="sunum-deck.html" class="nav-link">🎤 5 Dk Jüri Sunumu</a>
+        <a href="rapor-ciktisi.html" class="nav-link">🖨️ A4 PDF Rapor</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="studio-grid">
+      <!-- Left: 9:16 TikTok / IG Reels Live Story Canvas -->
+      <div>
+        <div class="phone-frame">
+          <canvas id="storyCanvas" width="360" height="640"></canvas>
+        </div>
+        <video id="webcamVideo" autoplay playsinline muted></video>
+      </div>
+
+      <!-- Right: AR Filter Controls, Webcam LUT & Export -->
+      <div>
+        <div class="card">
+          <h2>📱 Faz 1: TikTok & IG "Termal Kamera" AR Filtresi Stüdyosu</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Bu stüdyo, <strong>Project-Minus5</strong>'ın Faz 1'deki <code>#HararetiKes</code> AR filtresini hem <strong>gerçek zamanlı web kameranızla (Canlı Termal Shader)</strong> hem de <strong>sentetik Z kuşağı avatar modunda</strong> deneyimlemenizi ve tek tıkla paylaşılabilir 9:16 Story/Reels görseli indirmenizi sağlar.
+          </p>
+
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--ice-blue);">1. SENARYO VE BAŞLIK SEÇİN:</label>
+          <div class="pill-group">
+            <div class="pill active" onclick="setARContext('ctf', 'Millet Kütüphanesi Gece 03:15 • Kafa Yandı!', this)">💻 Kütüphane / CTF Sabahlaması</div>
+            <div class="pill" onclick="setARContext('gym', 'Son Squat Seti Bitti Ama Yangın Bitmedi!', this)">🏋️ Ağır Squat / Gym Sonrası</div>
+            <div class="pill" onclick="setARContext('exam', 'Vize Haftası Beyin İşlemcisi %99 Hararet!', this)">📚 Vize / Final Maratonu</div>
+            <div class="pill" onclick="setARContext('campus', 'Toplu Taşıma & Kampüs Sıcağı Tavan!', this)">☀️ Kampüs Koşturmacası</div>
+          </div>
+
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--ice-blue);">2. FİLTRE MODUNU DEĞİŞTİRİN (KAFA SALLAMA / BUTON TETİKLEYİCİSİ):</label>
+          <div class="btn-row">
+            <button id="arModeBtn" class="btn btn-primary" onclick="triggerSubZeroTransition()">
+              🧊 Harareti Kes (-5°C Hissine Geç!)
+            </button>
+            <button id="camBtn" class="btn btn-outline" onclick="toggleWebcam()">
+              📷 Web Kamerasını Aç (Canlı Termal LUT)
+            </button>
+            <button class="btn btn-outline" onclick="downloadStoryPNG()">
+              ⬇️ 9:16 Story Görselini İndir (.PNG)
+            </button>
+          </div>
+
+          <div class="privacy-banner">
+            🔒 <strong>Privacy-by-Design (KVKK / GDPR Uyumluluğu):</strong> Web kamerasını açtığınızda görüntü yalnızca tarayıcınızın yerel RAM belleğinde gerçek zamanlı renk haritasına (Thermal False-Color LUT $\rightarrow$ Sub-Zero Ice Blue) dönüştürülür; hiçbir sunucuya gönderilmez veya kaydedilmez.
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>🧠 Teknik İşleyiş: "Termal Kırmızı $\rightarrow$ -5°C Buz Mavisi"</h2>
+          <ul style="padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;">
+            <li><strong>Adım 1 (Overheat LUT):</strong> Kamera piksellerinin parlaklık (luminance) değeri $Y = 0.299R + 0.587G + 0.114B$ formülüyle hesaplanır ve kızılötesi termal palete (Koyu Mor $\rightarrow$ Kırmızı $\rightarrow$ Parlak Sarı) eşlenir.</li>
+            <li><strong>Adım 2 (Head-Shake / Tap Trigger):</strong> Kullanıcı kafasını salladığında veya <em>"Harareti Kes"</em> butonuna bastığında ekran kenarlarından kırağı (frost) kristalleri yürür ve Web Audio API ile <em>Buz Kırılma ASMR</em> sesi çalar.</li>
+            <li><strong>Adım 3 (Sub-Zero -5°C Sensation):</strong> Renk haritası anında H&S Buz Mavisi (`#00E5FF` / `#0077FF`) paletine döner ve altta yasal uyumluluk notu (<em>"-5°C gerçek sıcaklık düşüşü değil, ürünün yarattığı ferahlık hissidir"</em>) ile `#HararetiKes` çerçevesi oluşturulur.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('storyCanvas');
+    const ctx = canvas.getContext('2d');
+    const video = document.getElementById('webcamVideo');
+
+    let isCooled = false;
+    let webcamActive = false;
+    let webcamStream = null;
+    let currentCaption = 'Millet Kütüphanesi Gece 03:15 • Kafa Yandı!';
+    let currentContext = 'ctf';
+    let freezeFlash = 0;
+
+    const particles = Array.from({ length: 45 }, () => ({
+      x: Math.random() * 360,
+      y: Math.random() * 640,
+      r: 2 + Math.random() * 4.5,
+      vy: 1 + Math.random() * 1.8,
+      vx: (Math.random() - 0.5) * 0.8
+    }));
+
+    function playTransitionAudio(cooling) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const actx = new AudioCtx();
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = cooling ? 'triangle' : 'sawtooth';
+        osc.frequency.setValueAtTime(cooling ? 620 : 210, actx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(cooling ? 1850 : 120, actx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.09, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.36);
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.start();
+        osc.stop(actx.currentTime + 0.36);
+      } catch (e) {}
+    }
+
+    function setARContext(key, captionText, el) {
+      currentContext = key;
+      currentCaption = captionText;
+      el.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function triggerSubZeroTransition() {
+      isCooled = !isCooled;
+      freezeFlash = 1.0;
+      playTransitionAudio(isCooled);
+      const btn = document.getElementById('arModeBtn');
+      if (isCooled) {
+        btn.className = 'btn btn-heat';
+        btn.textContent = '🔥 Tekrar Termal Hararet Moduna Dön';
+      } else {
+        btn.className = 'btn btn-primary';
+        btn.textContent = '🧊 Harareti Kes (-5°C Hissine Geç!)';
+      }
+    }
+
+    async function toggleWebcam() {
+      const camBtn = document.getElementById('camBtn');
+      if (webcamActive) {
+        if (webcamStream) {
+          webcamStream.getTracks().forEach(t => t.stop());
+        }
+        webcamActive = false;
+        camBtn.textContent = '📷 Web Kamerasını Aç (Canlı Termal LUT)';
+        return;
+      }
+      try {
+        webcamStream = await navigator.mediaDevices.getUserMedia({ video: { width: 360, height: 480, facingMode: 'user' }, audio: false });
+        video.srcObject = webcamStream;
+        webcamActive = true;
+        camBtn.textContent = '⏹️ Kamerayı Kapat (Avatar Modu)';
+      } catch (err) {
+        alert('Kamera erişimi açılamadı veya izin verilmedi. Sentetik Termal Avatar modu aktif olarak çalışmaya devam ediyor.');
+      }
+    }
+
+    function renderWebcamLUT() {
+      const off = document.createElement('canvas');
+      off.width = 180;
+      off.height = 320;
+      const octx = off.getContext('2d');
+      octx.translate(180, 0);
+      octx.scale(-1, 1);
+      octx.drawImage(video, 0, 0, 180, 320);
+      const imgData = octx.getImageData(0, 0, 180, 320);
+      const d = imgData.data;
+
+      for (let i = 0; i < d.length; i += 4) {
+        const lum = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+        if (!isCooled) {
+          // Thermal Overheat Palette (Dark Purple -> Red -> Orange -> Yellow)
+          d[i] = Math.min(255, lum * 1.45 + 40);
+          d[i + 1] = lum > 140 ? (lum - 140) * 2.1 : lum * 0.25;
+          d[i + 2] = lum < 80 ? 80 - lum : 10;
+        } else {
+          // Sub-Zero Ice Blue Palette (Deep Navy -> Cyan -> Ice White)
+          d[i] = lum > 190 ? (lum - 190) * 3.5 : lum * 0.15;
+          d[i + 1] = Math.min(255, lum * 1.05 + 35);
+          d[i + 2] = Math.min(255, lum * 1.4 + 80);
+        }
+      }
+      octx.putImageData(imgData, 0, 0);
+      ctx.drawImage(off, 0, 0, 360, 640);
+    }
+
+    function renderSyntheticAvatar() {
+      // Background gradient
+      const grad = ctx.createRadialGradient(180, 270, 20, 180, 300, 340);
+      if (!isCooled) {
+        grad.addColorStop(0, '#ffbe0b');
+        grad.addColorStop(0.35, '#ff3b30');
+        grad.addColorStop(0.7, '#5c0614');
+        grad.addColorStop(1, '#140208');
+      } else {
+        grad.addColorStop(0, '#e0f2fe');
+        grad.addColorStop(0.35, '#00e5ff');
+        grad.addColorStop(0.7, '#004e89');
+        grad.addColorStop(1, '#030b17');
+      }
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 360, 640);
+
+      // Thermal concentric aura rings around head silhouette
+      for (let r = 135; r >= 55; r -= 25) {
+        ctx.beginPath();
+        ctx.arc(180, 265, r + Math.sin(Date.now() / 220 + r) * 4, 0, Math.PI * 2);
+        ctx.strokeStyle = !isCooled ? 'rgba(255, 180, 0, 0.28)' : 'rgba(0, 229, 255, 0.35)';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
+      // Center Avatar Icon & Status
+      ctx.font = '76px "Segoe UI Emoji", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(!isCooled ? '🥵🔥' : '😎🧊', 180, 285);
+    }
+
+    function renderFrame() {
+      if (webcamActive && video.readyState >= 2) {
+        renderWebcamLUT();
+      } else {
+        renderSyntheticAvatar();
+      }
+
+      // Animated Particles (Sparks vs Ice Crystals)
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        if (!isCooled) {
+          ctx.fillStyle = 'rgba(255, 149, 0, 0.7)';
+          p.y -= p.vy;
+          p.x += p.vx;
+          if (p.y < 0) p.y = 640;
+        } else {
+          ctx.fillStyle = 'rgba(165, 243, 252, 0.8)';
+          p.y += p.vy;
+          p.x += p.vx;
+          if (p.y > 640) p.y = 0;
+        }
+        if (p.x < 0) p.x = 360;
+        if (p.x > 360) p.x = 0;
+        ctx.fill();
+      });
+
+      // Top HUD Bar
+      ctx.fillStyle = 'rgba(5, 10, 20, 0.78)';
+      ctx.fillRect(16, 20, 328, 44);
+      ctx.strokeStyle = !isCooled ? '#ff3b30' : '#00e5ff';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(16, 20, 328, 44);
+
+      ctx.font = 'bold 12px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillStyle = !isCooled ? '#ff6b6b' : '#00e5ff';
+      ctx.fillText(!isCooled ? '🔥 MOD: TERMAL HARARET' : '❄️ MOD: -5°C FERAHLIK HİSSİ', 26, 46);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(!isCooled ? 'HARARET: %99' : 'KEPEK: %0 AKTİF', 334, 46);
+
+      // Context Caption Pill
+      ctx.fillStyle = 'rgba(5, 10, 20, 0.82)';
+      ctx.fillRect(16, 425, 328, 72);
+      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+      ctx.strokeRect(16, 425, 328, 72);
+
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 13px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#fde047';
+      ctx.fillText(currentCaption, 180, 452);
+
+      ctx.font = 'bold 15px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(!isCooled ? 'SİSTEM HARARET YAPTI!' : 'HARARETİ KES, -5°C HİSSİNE GEÇ!', 180, 480);
+
+      // Bottom Brand Banner
+      ctx.fillStyle = !isCooled ? 'rgba(122, 17, 17, 0.9)' : 'rgba(0, 75, 147, 0.92)';
+      ctx.fillRect(16, 512, 328, 106);
+      ctx.strokeStyle = !isCooled ? '#ff3b30' : '#00e5ff';
+      ctx.strokeRect(16, 512, 328, 106);
+
+      ctx.font = 'bold 16px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText('Head & Shoulders Buzlu Mentol', 180, 540);
+
+      ctx.font = 'bold 14px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#00e5ff';
+      ctx.fillText('"Harareti Kes, -5°C Hissine Geç!"', 180, 564);
+
+      ctx.font = '11px monospace';
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillText('#HararetiKes • @headandshoulderstr', 180, 586);
+
+      ctx.font = '9px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('*-5°C gerçek sıcaklık düşüşü değil, ürünün yarattığı ferahlık hissidir.', 180, 606);
+
+      if (freezeFlash > 0) {
+        ctx.fillStyle = `rgba(0, 229, 255, ${freezeFlash * 0.45})`;
+        ctx.fillRect(0, 0, 360, 640);
+        freezeFlash = Math.max(0, freezeFlash - 0.06);
+      }
+
+      requestAnimationFrame(renderFrame);
+    }
+
+    function downloadStoryPNG() {
+      const link = document.createElement('a');
+      link.download = `HS-Buzlu-Mentol-HararetiKes-${isCooled ? 'Minus5C' : 'Termal'}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    renderFrame();
+  </script>
+</body>
+</html>

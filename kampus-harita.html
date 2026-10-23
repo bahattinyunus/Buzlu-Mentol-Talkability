@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project-Minus5 | Türkiye Kampüs & Gym Cool-Down Pod IoT Telemetri Haritası</title>
+  <style>
+    :root {
+      --bg-dark: #050a14;
+      --bg-card: #0c1528;
+      --ice-blue: #00e5ff;
+      --ice-deep: #0077ff;
+      --heat-red: #ff3b30;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --text-main: #f0f6fc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(0, 229, 255, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top right, #0a1b38 0%, var(--bg-dark) 65%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 10, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .navbar-inner {
+      max-width: 1260px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--ice-blue);
+      background: rgba(0, 229, 255, 0.12);
+    }
+
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .top-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.15rem 1.3rem;
+    }
+
+    .stat-val {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--ice-blue);
+    }
+
+    .stat-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .ops-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 960px) {
+      .ops-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.18rem;
+      color: var(--ice-blue);
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Interactive Radar / Map Board */
+    .map-board {
+      position: relative;
+      background: radial-gradient(circle at center, #091e3a 0%, #040b17 100%);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 14px;
+      height: 360px;
+      overflow: hidden;
+      padding: 1rem;
+    }
+
+    .map-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+
+    .pod-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s;
+      z-index: 5;
+    }
+
+    .pod-node:hover {
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+
+    .pod-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--ice-blue);
+      border: 3px solid #fff;
+      margin: 0 auto 4px;
+      box-shadow: 0 0 18px var(--ice-blue);
+      position: relative;
+    }
+
+    .pod-node.active .pod-dot {
+      background: var(--emerald);
+      box-shadow: 0 0 24px var(--emerald);
+      transform: scale(1.2);
+    }
+
+    .pod-tag {
+      background: rgba(5, 10, 20, 0.88);
+      border: 1px solid var(--border-color);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.35rem 0 0.75rem;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0072ff, #00e5ff);
+      transition: width 0.3s ease;
+    }
+
+    .btn-action {
+      cursor: pointer;
+      border: none;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-action.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      margin-top: 0.5rem;
+    }
+
+    th, td {
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0, 229, 255, 0.1);
+      color: var(--ice-blue);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="brand-logo">🧊 Project-Minus5 • IoT Saha Telemetri Haritası</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">🖥️ Komuta Merkezi</a>
+        <a href="ar-deneyim.html" class="nav-link">📱 Canlı Termal AR Stüdyosu</a>
+        <a href="kampus-harita.html" class="nav-link active">🗺️ Kampüs Pod Haritası</a>
+        <a href="sunum-deck.html" class="nav-link">🎤 5 Dk Jüri Sunumu</a>
+        <a href="rapor-ciktisi.html" class="nav-link">🖨️ A4 PDF Rapor</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 style="font-size: 1.85rem; margin-bottom: 0.4rem;">🗺️ Faz 2: "Emergency Cool-Down Pod" Türkiye IoT Saha Operasyon Merkezi</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Üniversite kampüsleri, kütüphaneler ve spor salonu çıkışlarındaki 6 ana <strong>Acil Durum Ferahlama Kabini</strong> istasyonunun canlı stok, 4D mentol nebulizatörü ve QR dönüşüm telemetrisini inceleyin.
+    </p>
+
+    <div class="top-stats">
+      <div class="stat-card">
+        <div class="stat-val" id="totalSamples">50.000</div>
+        <div class="stat-lbl">Toplam Dağıtılan 90ml QR Numune</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="totalScans">14.620 (%29.2)</div>
+        <div class="stat-lbl">Tekil QR Okutma & Kupon Aktivasyonu</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="totalVideos">23.400 (%46.8)</div>
+        <div class="stat-lbl">120FPS Slow-Mo Video İndirme & UGC</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: var(--emerald);">6 / 6 AKTİF</div>
+        <div class="stat-lbl">Saha IoT Kabin Durumu & KVKK Uyum</div>
+      </div>
+    </div>
+
+    <div class="ops-grid">
+      <!-- Left: Interactive Turkey Pod Radar -->
+      <div class="card">
+        <h2>
+          <span>📡 Stratejik Kampüs, Kütüphane & Gym İstasyon Haritası</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">İstasyona tıklayın</span>
+        </h2>
+        <div class="map-board">
+          <div class="map-grid-lines"></div>
+
+          <!-- Istanbul Nodes -->
+          <div class="pod-node" style="left: 24%; top: 26%;" onclick="selectPod(2, this)">
+            <div class="pod-dot"></div>
+            <div class="pod-tag">💻 İTÜ Ayazağa #03</div>
+          </div>
+          <div class="pod-node" style="left: 18%; top: 38%;" onclick="selectPod(3, this)">
+            <div class="pod-dot"></div>
+            <div class="pod-tag">🎓 Boğaziçi & YTÜ #04</div>
+          </div>
+          <div class="pod-node" style="left: 30%; top: 44%;" onclick="selectPod(4, this)">
+            <div class="pod-dot"></div>
+            <div class="pod-tag">🏋️ MACFit İstanbul #05</div>
+          </div>
+
+          <!-- Ankara Nodes -->
+          <div class="pod-node active" style="left: 56%; top: 46%;" onclick="selectPod(0, this)">
+            <div class="pod-dot"></div>
+            <div class="pod-tag">🎓 ODTÜ Kampüs #01</div>
+          </div>
+          <div class="pod-node" style="left: 64%; top: 34%;" onclick="selectPod(1, this)">
+            <div class="pod-dot"></div>
+            <div class="pod-tag">📚 Millet Kütüphanesi #02</div>
+          </div>
+
+          <!-- Izmir Node -->
+          <div class="pod-node" style="left: 16%; top: 72%;" onclick="selectPod(5, this)">
+            <div class="pod-dot"></div>
+            <div class="pod-tag">☀️ Ege Kampüs #06</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Selected Pod Live Inspector -->
+      <div class="card">
+        <h2 id="podNameTitle">🎓 ODTÜ Kampüs Pod #01 (Çarşı / Kütüphane)</h2>
+        <p id="podTriggerDesc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Zihinsel Hararet Noktası: Vize/Final haftası ve ODTÜ Teknokent CTF/Hackathon yoğunluğu.
+        </p>
+
+        <div style="font-size: 0.82rem; display: flex; justify-content: space-between;">
+          <span>🎁 Kalan 90ml QR Numune Stoğu:</span>
+          <strong id="podStockVal">840 / 1.000 Adet (%84)</strong>
+        </div>
+        <div class="bar-wrap"><div id="podStockBar" class="bar-fill" style="width: 84%;"></div></div>
+
+        <div style="font-size: 0.82rem; display: flex; justify-content: space-between;">
+          <span>❄️ 4D Mentol Mikro-Nebulizatör Seviyesi:</span>
+          <strong id="podMentholVal">%91 Dolu</strong>
+        </div>
+        <div class="bar-wrap"><div id="podMentholBar" class="bar-fill" style="width: 91%;"></div></div>
+
+        <div style="font-size: 0.82rem; display: flex; justify-content: space-between;">
+          <span>🔗 Lokasyon QR Tarama & Kupon Dönüşümü:</span>
+          <strong id="podConvVal" style="color: var(--ice-blue);">%31.4 (Sektör Ort. 2.8x Üstü)</strong>
+        </div>
+        <div class="bar-wrap"><div id="podConvBar" class="bar-fill" style="width: 78%;"></div></div>
+
+        <div style="margin-top: 0.85rem;">
+          <button class="btn-action" onclick="simulatePodCycle()">🧊 10sn Ferahlama & Numune Tetikle</button>
+          <button class="btn-action secondary" onclick="refillPod()">🚚 Lojistik Stok İkmali Yap (%100)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pod Comparison Table -->
+    <div class="card">
+      <h2>📊 Lokasyon Bazlı A/B Performans Karşılaştırması (Zihinsel vs. Fiziksel Hararet)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Kabin Kodu & Lokasyon</th>
+            <th>Hararet Tipi (Persona)</th>
+            <th>Dağıtılan Numune</th>
+            <th>QR Tarama Oranı</th>
+            <th>Tam Boy İlk Satış Dönüşümü</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>POD #01 — ODTÜ Kütüphane / Çarşı</strong></td>
+            <td>👨‍💻 Zihinsel Hararet (Final / Kodlama)</td>
+            <td>10.500 Adet</td>
+            <td><strong>%31.4</strong></td>
+            <td>%13.8 (1.449 Tam Boy Şişe)</td>
+          </tr>
+          <tr>
+            <td><strong>POD #02 — Cumhurbaşkanlığı Millet Kütüphanesi</strong></td>
+            <td>📚 Zihinsel Hararet (7/24 Gece Sabahlaması)</td>
+            <td>11.200 Adet</td>
+            <td><strong>%34.2</strong></td>
+            <td>%14.6 (1.635 Tam Boy Şişe)</td>
+          </tr>
+          <tr>
+            <td><strong>POD #03 — İTÜ Ayazağa Hackathon & Merkez</strong></td>
+            <td>💻 Zihinsel Hararet (CTF / Mühendislik)</td>
+            <td>9.400 Adet</td>
+            <td><strong>%29.8</strong></td>
+            <td>%12.9 (1.212 Tam Boy Şişe)</td>
+          </tr>
+          <tr>
+            <td><strong>POD #04 — Boğaziçi & YTÜ Kampüs Hattı</strong></td>
+            <td>🎧 Sosyal & Akademik Hararet</td>
+            <td>7.100 Adet</td>
+            <td><strong>%26.5</strong></td>
+            <td>%11.4 (809 Tam Boy Şişe)</td>
+          </tr>
+          <tr>
+            <td><strong>POD #05 — MACFit Spor Salonu Çıkışları</strong></td>
+            <td>🏋️ Fiziksel Hararet (Ağır Squat / Gym)</td>
+            <td>6.800 Adet</td>
+            <td><strong>%27.5</strong></td>
+            <td>%13.1 (890 Tam Boy Şişe)</td>
+          </tr>
+          <tr>
+            <td><strong>POD #06 — Ege Üniversitesi Kampüs Meydanı</strong></td>
+            <td>☀️ Fiziksel & Sosyal Hararet</td>
+            <td>5.000 Adet</td>
+            <td><strong>%24.8</strong></td>
+            <td>%10.8 (540 Tam Boy Şişe)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const pods = [
+      {
+        name: "🎓 ODTÜ Kampüs Pod #01 (Çarşı / Kütüphane)",
+        desc: "Zihinsel Hararet Noktası: Vize/Final haftası ve ODTÜ Teknokent CTF/Hackathon yoğunluğu.",
+        stock: 840,
+        menthol: 91,
+        convText: "%31.4 (Sektör Ort. 2.8x Üstü)",
+        convPct: 78
+      },
+      {
+        name: "📚 Cumhurbaşkanlığı Millet Kütüphanesi Pod #02",
+        desc: "Zihinsel Hararet Noktası: Gece 03:00 sınav ve proje sabahlaması çıkış aksı (En yüksek QR dönüşüm noktası).",
+        stock: 760,
+        menthol: 86,
+        convText: "%34.2 (En Yüksek Dönüşüm Lideri 🏆)",
+        convPct: 86
+      },
+      {
+        name: "💻 İTÜ Ayazağa Pod #03 (Merkezi Derslik & Hackathon)",
+        desc: "Zihinsel Hararet Noktası: 24 saatlik kodlama maratonları ve mühendislik fakültesi yaya trafiği.",
+        stock: 890,
+        menthol: 94,
+        convText: "%29.8 (Yüksek Teknoloji Etkileşimi)",
+        convPct: 74
+      },
+      {
+        name: "🎧 Boğaziçi & YTÜ Kampüs Pod #04",
+        desc: "Sosyal & Akademik Hararet Noktası: Kulüp etkinlikleri ve kampüs meydanı geçiş aksı.",
+        stock: 910,
+        menthol: 88,
+        convText: "%26.5 (Yüksek Slow-Mo Video Paylaşımı)",
+        convPct: 68
+      },
+      {
+        name: "🏋️ MACFit Spor Salonu Çıkışları Pod #05",
+        desc: "Fiziksel Hararet Noktası: Ağır antrenman sonrası ter ve saç derisi yangısını anında kesen deneyim noktası.",
+        stock: 795,
+        menthol: 82,
+        convText: "%27.5 (Antrenman Sonrası Hızlı Deneme)",
+        convPct: 71
+      },
+      {
+        name: "☀️ Ege Üniversitesi Kampüs Pod #06",
+        desc: "Fiziksel & Sosyal Hararet Noktası: Açık hava kampüs sıcaklığı ve öğrenci buluşma noktası.",
+        stock: 930,
+        menthol: 95,
+        convText: "%24.8 (Yüksek Gençlik Erişimi)",
+        convPct: 64
+      }
+    ];
+
+    let activePodIdx = 0;
+    let globalSamples = 50000;
+    let globalScans = 14620;
+
+    function selectPod(idx, el) {
+      activePodIdx = idx;
+      document.querySelectorAll('.pod-node').forEach(n => n.classList.remove('active'));
+      el.classList.add('active');
+      renderPodInspector();
+    }
+
+    function renderPodInspector() {
+      const p = pods[activePodIdx];
+      document.getElementById('podNameTitle').textContent = p.name;
+      document.getElementById('podTriggerDesc').textContent = p.desc;
+      const pct = Math.round((p.stock / 1000) * 100);
+      document.getElementById('podStockVal').textContent = `${p.stock} / 1.000 Adet (%${pct})`;
+      document.getElementById('podStockBar').style.width = `${pct}%`;
+      document.getElementById('podMentholVal').textContent = `%${p.menthol} Dolu`;
+      document.getElementById('podMentholBar').style.width = `${p.menthol}%`;
+      document.getElementById('podConvVal').textContent = p.convText;
+      document.getElementById('podConvBar').style.width = `${p.convPct}%`;
+    }
+
+    function simulatePodCycle() {
+      const p = pods[activePodIdx];
+      if (p.stock > 0) p.stock--;
+      if (p.menthol > 5) p.menthol = Math.max(5, p.menthol - 1);
+      globalSamples++;
+      globalScans++;
+      document.getElementById('totalSamples').textContent = globalSamples.toLocaleString('tr-TR');
+      document.getElementById('totalScans').textContent = `${globalScans.toLocaleString('tr-TR')} (%29.2)`;
+      renderPodInspector();
+    }
+
+    function refillPod() {
+      const p = pods[activePodIdx];
+      p.stock = 1000;
+      p.menthol = 100;
+      renderPodInspector();
+    }
+  </script>
+</body>
+</html>

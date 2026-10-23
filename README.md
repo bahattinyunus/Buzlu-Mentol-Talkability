@@ -21,6 +21,8 @@
 | 📑 **[`rapor-ciktisi.html`](./rapor-ciktisi.html)** | Tarayıcıdan `Ctrl + P` ile Doğrudan **A4 PDF** Olarak Kaydedilebilen Resmi Rapor Çıktısı Tasarımı | **A4 PDF Çıktısı** |
 | 🎤 **[`sunum-deck.html`](./sunum-deck.html)** | **5 Dakikalık İnteraktif Jüri Sunumu (10 Slayt):** Klavye ile kontrol edilen, canlı sayaçlı ve konuşmacı notlu Pitch Deck | **Canlı Sunum Deck** |
 | 🖥️ **[`index.html`](./index.html)** | **360° Komuta Merkezi:** *Termal AR Filtresi*, *4D Pod QR Üretici*, *Soğutucu Dolap POSM*, *Hızlı Ticaret* ve *KPI Simülatörü* | **Canlı Prototip** |
+| 📷 **[`ar-deneyim.html`](./ar-deneyim.html)** | **Canlı WebRTC Kamera & Termal AR Filtre Stüdyosu:** Gerçek zamanlı Termal LUT $\rightarrow$ -5°C Buz Mavisi dönüşümü ve 9:16 Story PNG indirici | **AR Stüdyo** |
+| 🗺️ **[`kampus-harita.html`](./kampus-harita.html)** | **Türkiye Kampüs & Gym IoT Telemetri Haritası:** ODTÜ, İTÜ, Millet Kütüphanesi ve MACFit kabinlerinin canlı stok ve QR dönüşüm radarı | **IoT Saha Haritası** |
 | 🎯 **[`docs/01-WHO-Consumer-Personas-and-Insights.md`](./docs/01-WHO-Consumer-Personas-and-Insights.md)** | 3 Çekirdek Z Kuşağı Personası, Gerilim-İçgörü Matematiği ve Reason-to-Believe (RTB) Analizi | **30 Puan (WHO)** |
 | 💡 **[`docs/02-WHAT-Creative-Strategy-and-Copywriting.md`](./docs/02-WHAT-Creative-Strategy-and-Copywriting.md)** | Büyük Yaratıcı Fikir, Slogan Mimarisi, TikTok/Reels Senaryoları ve Talkability Psikolojisi | **45 Puan (WHAT)** |
 | 🚀 **[`docs/03-HOW-360-Execution-and-Phased-Rollout.md`](./docs/03-HOW-360-Execution-and-Phased-Rollout.md)** | Termal AR Filtresi, *Emergency Cool-Down Pod* Kurulumu, Perakende POSM ve 12 Haftalık Yayılım Planı | **20 Puan (HOW)** |
@@ -29,6 +31,8 @@
 | 🎤 **[`docs/06-Pitch-Deck-and-Jury-QA-Playbook.md`](./docs/06-Pitch-Deck-and-Jury-QA-Playbook.md)** | 5 Dakikalık Sunum (Pitch) Akışı, Optimal Bütçe Dağılımı ve Jüri Soru-Cevap (Q&A) Savunma Rehberi | **Sunum Rehberi** |
 | 🛒 **[`docs/07-Retail-POSM-and-Quick-Commerce-Playbook.md`](./docs/07-Retail-POSM-and-Quick-Commerce-Playbook.md)** | Mağaza İçi "Soğutucu Dolap" POSM Teknik Spesifikasyonları ve Getir/Trendyol Go Sepet Algoritması | **Perakende Ek** |
 | 📈 **[`docs/08-Financial-ROI-and-Unit-Economics.md`](./docs/08-Financial-ROI-and-Unit-Economics.md)** | Pazarlama Mühendisliği Birim Ekonomisi, Dönüşüm Matematiği ve 3 Senaryolu Duyarlılık Analizi | **Finansal ROI Ek** |
+| 📣 **[`docs/09-Influencer-Seeding-and-Creator-Briefs.md`](./docs/09-Influencer-Seeding-and-Creator-Briefs.md)** | 3 Katmanlı Tohumlama Piramidi, İçerik Üretici Briefleri ve Termokromik *Emergency Overheat Kit* Tasarımı | **Creator Brief Ek** |
+| 🧬 **[`docs/10-Sensory-Neuroscience-and-Claim-Compliance.md`](./docs/10-Sensory-Neuroscience-and-Claim-Compliance.md)** | TRPM8 Soğuk Reseptör Nöro-Bilimi ("-5°C Ferahlık Hissi" Mekanizması) ve P&G Yasal İddia Uyumluluk Matrisi | **Bilimsel & Yasal Ek** |
 
 ---
 
@@ -310,9 +314,11 @@ flowchart LR
 
 ---
 
-## 🖥️ Canlı Simülasyon, Sunum ve Çıktı Araçları
+## 🖥️ Canlı Simülasyon, Sunum ve Çıktı Araçları (6 Tam Modül)
 
 1. **[`index.html`](./index.html) (360° İnteraktif Komuta Merkezi):** Tarayıcıda açarak *Termal Kamera AR Filtresi (WebAudio SFX & Parçacık Simülasyonu)*, *Emergency Cool-Down Pod Dinamik QR Üretici*, *Mağaza İçi Soğutucu Dolap POSM*, *Getir/Trendyol Go Sepet Algoritması* ve *Senaryo Bazlı KPI Hesaplayıcı* modüllerini canlı deneyimleyebilirsiniz.
-2. **[`sunum-deck.html`](./sunum-deck.html) (5 Dakikalık İnteraktif Jüri Sunumu — 10 Slayt):** Klavye yön tuşlarıyla kontrol edilen, dahili 5 dakikalık jüri pitch sayacı ve konuşmacı notları (`N` tuşu) içeren tam ekran sunum modülüdür.
-3. **[`rapor-ciktisi.html`](./rapor-ciktisi.html) (Yazdırılabilir A4 PDF Raporu):** Tarayıcıda açıp `Ctrl + P` (Yazdır / PDF Olarak Kaydet) komutuyla doğrudan jüriye veya yarışma sistemine sunulmaya hazır resmi **A4 PDF** çıktısı alabilirsiniz.
-4. **[`PROJE-CIKTI-RAPORU.md`](./PROJE-CIKTI-RAPORU.md) (Kopyalanabilir Tam Metin Çıktısı):** Yarışma başvuru formlarına veya sunum notlarına doğrudan kopyalayıp yapıştırabileceğiniz temiz metin versiyonudur.
+2. **[`ar-deneyim.html`](./ar-deneyim.html) (Canlı WebRTC Kamera & Termal AR Filtre Stüdyosu):** Gerçek web kameranızı açarak veya sentetik avatar modunda piksellerin gerçek zamanlı **Termal Kırmızı $\rightarrow$ -5°C Buz Mavisi** dönüşümünü test edebilir ve tek tıkla **9:16 TikTok/Reels Story PNG** görseli indirebilirsiniz.
+3. **[`kampus-harita.html`](./kampus-harita.html) (Türkiye Kampüs & Gym IoT Saha Operasyon Haritası):** ODTÜ, İTÜ, Cumhurbaşkanlığı Millet Kütüphanesi, Boğaziçi, Ege ve MACFit noktalarındaki *Emergency Cool-Down Pod* kabinlerinin canlı numune stoğunu, 4D mentol nebulizatör seviyesini ve QR dönüşüm liderliğini inceleyebilirsiniz.
+4. **[`sunum-deck.html`](./sunum-deck.html) (5 Dakikalık İnteraktif Jüri Sunumu — 10 Slayt):** Klavye yön tuşlarıyla kontrol edilen, dahili 5 dakikalık jüri pitch sayacı ve konuşmacı notları (`N` tuşu) içeren tam ekran sunum modülüdür.
+5. **[`rapor-ciktisi.html`](./rapor-ciktisi.html) (Yazdırılabilir A4 PDF Raporu):** Tarayıcıda açıp `Ctrl + P` (Yazdır / PDF Olarak Kaydet) komutuyla doğrudan jüriye veya yarışma sistemine sunulmaya hazır resmi **A4 PDF** çıktısı alabilirsiniz.
+6. **[`PROJE-CIKTI-RAPORU.md`](./PROJE-CIKTI-RAPORU.md) (Kopyalanabilir Tam Metin Çıktısı):** Yarışma başvuru formlarına veya sunum notlarına doğrudan kopyalayıp yapıştırabileceğiniz temiz metin versiyonudur.
